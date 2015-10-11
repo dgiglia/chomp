@@ -1,0 +1,37 @@
+%section.well.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %form.form-horizontal
+        %header
+          %h1 Add a Business
+        %fieldset
+          .form-group
+            %label.control-label.col-sm-2 Business Name
+            .col-sm-6
+              %input.form-control(type="text")
+          .form-group
+            %label.control-label.col-sm-2 Address
+            .col-sm-6
+              %input.form-control(type="text")
+          .form-group
+            %label.control-label.col-sm-2 City
+            .col-sm-6
+              %input.form-control(type="text")
+          .form-group
+            %label.control-label.col-sm-2 State
+            .col-sm-6
+              %input.form-control(type="text")
+          .form-group
+            %label.control-label.col-sm-2 Website
+            .col-sm-6
+              %input.form-control(type="text")
+          .form-group
+            %label.control-label.col-sm-2 Type
+            .col-sm-6
+              %select.form-group(name="")
+                %option American
+                %option Indian
+                %option Thai
+        %fieldset.actions.control-group.col-sm-offset-2
+          .controls
+            %input(type="submit" value="Add" class="btn btn-default")

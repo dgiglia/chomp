@@ -1,0 +1,2 @@
+chOMP a Yelp-ish clone for practice 
+Tealeaf Academy: Course 3

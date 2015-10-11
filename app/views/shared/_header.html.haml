@@ -1,0 +1,44 @@
+%nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      %button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand(href="#" style="font-size: 200%") chOMP
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav        
+        %li.dropdown
+          %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Eateries <span class="caret" aria-hidden="true"></span>
+          %ul.dropdown-menu
+            %li
+              %a(href="#") American
+            %li
+              %a(href="#") Italian
+            %li
+              %a(href="#") Thai
+            %li.divider(role="separator")
+            %li
+              %a(href="#") <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  Add a Business 
+        %li
+          %a(href="#") chOMPs 
+      %form.navbar-form.navbar-left(role="search")
+        .form-group
+          %input.form-control(type="text" placeholder="Search by City")
+        %button.btn.btn-default(type="submit") Go!
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          %a(href="#") Register
+        %li
+          %a(href="#") Sign In
+        %li.dropdown
+          %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Welcome User <span class="caret" aria-hidden="true"></span>
+          %ul.dropdown-menu
+            %li
+              %a(href="#") <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  My profile 
+            %li
+              %a(href="#") <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>  Edit profile 
+            %li.divider(role="separator")
+            %li
+              %a(href="#") <span class="glyphicon glyphicon-off" aria-hidden="true"></span>  Sign Out 

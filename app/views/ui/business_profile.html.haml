@@ -1,0 +1,55 @@
+%section.container
+  .row
+    .col-sm-10.col-sm-offset-1.profile
+      .col-sm-3
+        %img.img-responsive(src="/assets/face_icons/man6.png") 
+      .col-sm-5
+        %h2 <a>Restaurant</a>
+        %h4 New York, New York 
+        %hr
+  .row
+    .col-sm-6.col-sm-offset-1
+      .well
+        %form.form-horizontal
+          %header
+          %h4 Add a chOMP
+          %fieldset
+            .form-group
+              %label.control-label.col-sm-2 Rating
+              .col-sm-8
+                %input.form-control(type="text")
+            .form-group
+              %label.control-label.col-sm-2 Review
+              .col-sm-8
+                %input.form-control(type="textarea")
+          %fieldset.actions.control-group.col-sm-offset-2
+          .controls
+            %input(type="submit" value="Add" class="btn btn-default")
+
+
+        
+      %h4 Restaurant's chOMPs
+      - 5.times do
+        %label <a>User</a> 
+        %p City, State
+        %label Rating
+        %p <span class="glyphicon glyphicon-ice-lolly-tasted"></span> <span class="glyphicon glyphicon-ice-lolly-tasted"></span> <span class="glyphicon glyphicon-ice-lolly-tasted"></span> <span class="glyphicon glyphicon-ice-lolly-tasted"></span> <span class="glyphicon glyphicon-ice-lolly-tasted"></span>   5/5 bites
+        %label Review
+        %p This is the best place ever. Can you believe they gave me free cookies?!
+        %hr
+    .col-sm-3.col-sm-offset-1
+      %h4 About Restaurant
+      %label Location
+      %p Street Address
+      %p City, State
+      %label Type
+      %p Chinese
+      %label Website
+      %p <a>www.example.com</a>
+      %hr
+      %label Latest chOMP
+      %p 5/5/15
+      %label Total chOMPs
+      %p 237
+      %hr
+      
