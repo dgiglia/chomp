@@ -17,12 +17,12 @@ gem 'autoprefixer-rails'
 group :development, :test do
   gem 'pry'
   gem 'rspec-rails', '~> 3.0'
+  gem 'fabrication'
+  gem 'faker'
 end
 
 group :test do
   gem 'shoulda-matchers'
-  gem 'fabrication'
-  gem 'faker'
   gem 'capybara'
   gem 'launchy'
 end

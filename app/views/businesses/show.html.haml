@@ -1,0 +1,57 @@
+%section.container
+  .row
+    .col-sm-10.col-sm-offset-1.profile
+      .col-sm-3
+        %img.img-responsive(src="/assets/face_icons/man6.png") 
+      .col-sm-5
+        %h2= @business.name
+        %h4= @business.city + ", " + @business.state 
+        %hr
+  .row
+    .col-sm-6.col-sm-offset-1
+      .well
+        %header
+          %h4 Add your chOMP
+        = bootstrap_nested_form_for [@business, Review.new], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10' do |f|
+          %fieldset
+            = f.select :rating, rating_options, label: "Rating"
+            = f.text_area :comment, rows: 6, label: "Comments"
+          %fieldset.form-group.actions
+            = f.submit "Add", class: "btn btn-success col-sm-offset-2"
+            = link_to "Cancel", @business, class: "btn btn-default"
+        
+      %h4 #{@business.name}'s chOMPs
+      - @reviews.each do |review|
+        %p 
+          - review.rating.times do
+            <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
+          #{review.rating} / 5 bites
+        %p= review.comment
+        %p.quiet 
+          Reviewed by:
+          = link_to review.user.name, user_path(review.user) 
+          on #{display_datetime(review.created_at)}
+        %hr
+    .col-sm-3.col-sm-offset-1
+      %h4 About #{@business.name}
+      %label Location
+      %p
+        = @business.address 
+        <br>
+        = @business.city + ", " + @business.state
+      %label Category
+      %p= @business.category.name
+      %label Website
+      %p= fix_url(@business.url)
+      %hr
+      %label Overall Rating
+      %p
+        - @business.average_rating.to_i.times do
+          <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
+        #{@business.average_rating} / 5 bites
+      %label Latest chOMP
+      %p= display_datetime(@reviews.last.created_at)
+      %label Total chOMPs
+      %p= @reviews.count
+      %hr
+      

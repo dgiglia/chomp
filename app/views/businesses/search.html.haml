@@ -1,8 +1,8 @@
 %section.container
   .col-sm-12.col-sm-offset-1
-    %h2 All Businesses
+    %h2= "Results for '#{params[:search_term]}':"
     .row
-      - @businesses.each do |business|
+      - @results.each do |business|
         .col-sm-4      
           %h3=link_to business.name, business_path(business) 
           %p= business.address

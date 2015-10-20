@@ -1,0 +1,34 @@
+%section.container
+  .row
+    .col-sm-10.col-sm-offset-1.profile
+      .col-sm-3
+        %img.img-responsive(src="#{@user.avatar}") 
+      .col-sm-5
+        %h2= @user.name
+        %h4= @user.city + ", " + @user.state 
+        %hr
+        
+  .row
+    .col-sm-6.col-sm-offset-1
+      %h4 My chOMPs
+      .row
+        - @user.reviews.each do |review|
+          .col-sm-6
+            %label= link_to review.business.name, business_path(review.business)
+            %p 
+              - review.rating.times do
+                <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
+              #{review.rating} / 5 bites
+            %p= review.comment
+            %hr 
+    .col-sm-3.col-sm-offset-1
+      %h4 About #{@user.name}
+      %label Location
+      %p= @user.city + ", " + @user.state
+      %label chOMPing since
+      %p= display_datetime(@user.created_at)
+      %label Latest chOMP
+      %p= display_datetime(@user.reviews.last.created_at)
+      %label Total chOMPs
+      %p= @user.reviews.count
+      %hr
