@@ -13,7 +13,7 @@ end
 def sign_in(user=nil)
   user ||= Fabricate(:user)
   visit sign_in_path
-  fill_in "Email Address", with: user.email
+  fill_in "Email", with: user.email
   fill_in "Password", with: user.password
-  click_button "Submit"
+  click_button "Sign In"
 end
