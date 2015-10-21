@@ -12,14 +12,14 @@
       .well
         %form.form-horizontal
           %header
-          %h4 Add a chOMP
+          %h4 Add a chOMP review
           %fieldset
             .form-group
               %label.control-label.col-sm-2 Rating
               .col-sm-8
                 %input.form-control(type="text")
             .form-group
-              %label.control-label.col-sm-2 Review
+              %label.control-label.col-sm-2 Comments
               .col-sm-8
                 %input.form-control(type="textarea")
           %fieldset.actions.control-group.col-sm-offset-2
@@ -28,7 +28,7 @@
 
 
         
-      %h4 Restaurant's chOMPs
+      %h4 Restaurant's chOMP reviews
       - 5.times do
         %label <a>User</a> 
         %p City, State
@@ -42,7 +42,7 @@
       %label Location
       %p Street Address
       %p City, State
-      %label Type
+      %label Category
       %p Chinese
       %label Website
       %p <a>www.example.com</a>

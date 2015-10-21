@@ -6,39 +6,27 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand(href="#" style="font-size: 200%") chOMP
+      %a.navbar-brand(href="/" style="font-size: 200%") chOMP
     .collapse.navbar-collapse
-      %ul.nav.navbar-nav        
-        %li.dropdown
-          %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Eateries <span class="caret" aria-hidden="true"></span>
-          %ul.dropdown-menu
-            %li
-              %a(href="#") American
-            %li
-              %a(href="#") Italian
-            %li
-              %a(href="#") Thai
-            %li.divider(role="separator")
-            %li
-              %a(href="#") <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  Add a Business 
-        %li
-          %a(href="#") chOMPs 
-      %form.navbar-form.navbar-left(role="search")
-        .form-group
-          %input.form-control(type="text" placeholder="Search by City")
-        %button.btn.btn-default(type="submit") Go!
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          %a(href="#") Register
-        %li
-          %a(href="#") Sign In
-        %li.dropdown
-          %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Welcome User <span class="caret" aria-hidden="true"></span>
-          %ul.dropdown-menu
-            %li
-              %a(href="#") <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  My profile 
-            %li
-              %a(href="#") <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>  Edit profile 
-            %li.divider(role="separator")
-            %li
-              %a(href="#") <span class="glyphicon glyphicon-off" aria-hidden="true"></span>  Sign Out 
+      - if signed_in?
+        %ul.nav.navbar-nav         
+          %li.dropdown
+            %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Eateries <span class="caret" aria-hidden="true"></span>
+            %ul.dropdown-menu
+              - Category.all.each do |category|
+                %li= link_to category.name, category
+              %li.divider(role="separator")
+              %li= link_to "See All", home_path
+          %li= link_to "chOMPs", reviews_path
+          %li= link_to "Add A New Eatery", new_business_path           
+          = form_tag search_businesses_path, class: "col-md-5 navbar-form", method: 'get' do
+            .form-group
+              = search_field_tag :search_term, params[:search_term], placeholder: "Search by City", class: 'form-control'
+              = submit_tag "Go!", class: "btn btn-default"
+        %ul.nav.navbar-nav.navbar-right
+          %li.dropdown
+            %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Welcome #{current_user.name} <span class="caret" aria-hidden="true"></span>
+            %ul.dropdown-menu
+              %li= link_to "My Profile", user_path(current_user.id)            
+              %li.divider(role="separator")
+              %li= link_to "Sign Out", sign_out_path 

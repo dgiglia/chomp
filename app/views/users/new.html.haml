@@ -1,0 +1,42 @@
+%section.container
+  .row
+    .col-sm-10
+      .well
+        %header
+          %h1 Register
+        = bootstrap_form_for(@user) do |f|
+          %fieldset
+            .form-group.col-sm-11
+              = f.email_field :email, layout: :horizontal
+            .form-group.col-sm-11
+              = f.password_field :password, layout: :horizontal
+            .form-group.col-sm-11
+              = f.text_field :name, label: "Full Name", layout: :horizontal
+            .form-group.col-sm-11
+              = f.text_field :city, label: "City", layout: :horizontal
+            .form-group.col-sm-11
+              = f.text_field :state, label: "State", layout: :horizontal
+            .form-group.col-sm-11 
+              = f.label "Avatar"
+              .row.col-sm-offset-1                
+                .col-sm-2
+                  = f.radio_button :avatar, "/assets/face_icons/man6.png", checked: "checked"
+                  %img.img-responsive(src="/assets/face_icons/man6.png")
+                .col-sm-2
+                  = f.radio_button :avatar, "/assets/face_icons/man5.png"
+                  %img.img-responsive(src="/assets/face_icons/man5.png")
+                .col-sm-2
+                  = f.radio_button :avatar, "/assets/face_icons/man1.png"
+                  %img.img-responsive(src="/assets/face_icons/man1.png")
+                .col-sm-2
+                  = f.radio_button :avatar, "/assets/face_icons/woman7.png"
+                  %img.img-responsive(src="/assets/face_icons/woman7.png")
+                .col-sm-2
+                  = f.radio_button :avatar, "/assets/face_icons/woman8.png"
+                  %img.img-responsive(src="/assets/face_icons/woman8.png")
+                .col-sm-2                  
+                  = f.radio_button :avatar, "/assets/face_icons/woman9.png"
+                  %img.img-responsive(src="/assets/face_icons/woman9.png")
+          %fieldset.actions.control-group.col-sm-offset-2
+            = f.submit "Register", class: "btn btn-success"
+            = link_to "Cancel", root_path, class: "btn btn-default"

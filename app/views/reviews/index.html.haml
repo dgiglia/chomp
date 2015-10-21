@@ -1,0 +1,17 @@
+%section.container
+  .col-sm-12.col-sm-offset-1
+    %h2 All chOMPs
+    .row
+      - @reviews.each do |review|
+        .col-sm-6
+          %label= link_to review.business.name, business_path(review.business)
+          %p 
+            - review.rating.times do
+              <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
+            #{review.rating} / 5 bites
+          %p= review.comment
+          %p.quiet 
+            Reviewed by:
+            = link_to review.user.name, user_path(review.user) 
+            on #{display_datetime(review.created_at)}
+          %hr 
