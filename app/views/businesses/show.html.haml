@@ -2,7 +2,7 @@
   .row
     .col-sm-10.col-sm-offset-1.profile
       .col-sm-3
-        %img.img-responsive(src="/assets/face_icons/man6.png") 
+        %img.img-responsive(src="/assets/face_icons/shop.png") 
       .col-sm-5
         %h2= @business.name
         %h4= @business.city + ", " + @business.state 
@@ -50,8 +50,8 @@
           <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
         #{@business.average_rating} / 5 bites
       %label Latest chOMP
-      %p= display_datetime(@reviews.last.created_at)
+      %p= latest_chomp(@business)
       %label Total chOMPs
-      %p= @reviews.count
+      %p= @business.reviews.count
       %hr
       

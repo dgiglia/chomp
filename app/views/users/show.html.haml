@@ -28,7 +28,7 @@
       %label chOMPing since
       %p= display_datetime(@user.created_at)
       %label Latest chOMP
-      %p= display_datetime(@user.reviews.last.created_at)
+      %p= latest_chomp(@user)
       %label Total chOMPs
       %p= @user.reviews.count
       %hr
