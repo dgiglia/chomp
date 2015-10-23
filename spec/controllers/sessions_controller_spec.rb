@@ -4,7 +4,7 @@ describe SessionsController do
   describe "GET new" do
     it "renders new template for unauthenticated users" do
       get :new
-      expect(response).not_to redirect_to home_path
+      expect(response).to render_template(:new)
     end
     it "redirects to home page for authenticated users" do
       set_current_user

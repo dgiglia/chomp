@@ -21,7 +21,7 @@ describe BusinessesController do
       business1 = Fabricate(:business, name: "beta")
       business2 = Fabricate(:business, name: "alpha")
       get :index
-      expect(assigns(:businesses)).to match_array([business2, business1])
+      expect(assigns(:businesses)).to eq([business2, business1])
     end
   end
   
