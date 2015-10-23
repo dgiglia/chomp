@@ -56,12 +56,12 @@ binbox = Business.create!(name: 'binBOX',
 )
 
 
-bob = User.create!(name: "Bob", email: "bob@example.com", password: "password", city: 'Sandy', state: 'California', avatar: "/assets/face_icons/man6.png")
-thadeus = User.create!(name: "Thadeus", email: "thadeus@example.com", password: "password", city: 'Oxford', state: 'Maine', avatar: "/assets/face_icons/man5.png")
-antilles = User.create!(name: "Antilles", email: "antilles@example.com", password: "password", city: 'Rochester', state: 'Minnesota', avatar: "/assets/face_icons/man1.png")
-anne = User.create!(name: "Anne Fusioni", email: "anne@example.com", password: "password", city: 'Bolden', state: 'Louisiana', avatar: "/assets/face_icons/woman9.png")
-jen = User.create!(name: "Jennifer Fullbright", email: "jen@example.com", password: "password", city: 'Chicago', state: 'Illinois', avatar: "/assets/face_icons/woman8.png")
-tasha = User.create!(name: "Natasha Schoiles", email: "tasha@example.com", password: "password", city: 'Lake City', state: 'Arizona', avatar: "/assets/face_icons/woman7.png")
+bob = User.create!(name: "Bob", email: "bob@example.com", password: "password", city: 'Sandy', state: 'California', avatar: "/face_icons/man6.png")
+thadeus = User.create!(name: "Thadeus", email: "thadeus@example.com", password: "password", city: 'Oxford', state: 'Maine', avatar: "/face_icons/man5.png")
+antilles = User.create!(name: "Antilles", email: "antilles@example.com", password: "password", city: 'Rochester', state: 'Minnesota', avatar: "/face_icons/man1.png")
+anne = User.create!(name: "Anne Fusioni", email: "anne@example.com", password: "password", city: 'Bolden', state: 'Louisiana', avatar: "/face_icons/woman9.png")
+jen = User.create!(name: "Jennifer Fullbright", email: "jen@example.com", password: "password", city: 'Chicago', state: 'Illinois', avatar: "/face_icons/woman8.png")
+tasha = User.create!(name: "Natasha Schoiles", email: "tasha@example.com", password: "password", city: 'Lake City', state: 'Arizona', avatar: "/face_icons/woman7.png")
 
 Review.create!(user: bob, rating: 2, business: duck , comment: "Terrible service.")
 Review.create!(user: thadeus, rating: 5, business: duck , comment: "Delicious food at a great price.")
