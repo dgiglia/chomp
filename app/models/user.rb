@@ -4,5 +4,4 @@ class User < ActiveRecord::Base
   
   validates_presence_of :email, :password, :name, :city, :state
   validates_uniqueness_of :email 
-
 end

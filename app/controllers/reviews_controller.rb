@@ -9,6 +9,7 @@ class ReviewsController < ApplicationController
     @business = Business.find(params[:business_id])
     review = @business.reviews.create(review_params.merge!(user: current_user))
     if review.save
+      flash['success'] = "Your review was successfully created."
       redirect_to @business
     else
       @reviews = @business.reviews.reload

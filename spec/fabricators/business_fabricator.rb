@@ -1,5 +1,5 @@
 Fabricator(:business) do
-  name {Faker::Company.name}
+  name { sequence(:name) { |i| Faker::Company.name + "#{i}" } }
   city {Faker::Address.city}
   state {Faker::Address.state}
   address {Faker::Address.street_address}

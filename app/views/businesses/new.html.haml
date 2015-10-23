@@ -17,7 +17,7 @@
             .form-group.col-sm-11
               = f.text_field :url, label: "Website", layout: :horizontal
             .form-group.col-sm-11
-              = f.select :category_id, options_for_select(Category.all.map { |cat| [cat.name, cat.id]}), label: "Category", layout: :horizontal
+              = f.collection_select :category_id, Category.order(:name), :id, :name
           %fieldset.actions.control-group.col-sm-offset-2
             = f.submit "Add", class: "btn btn-success"
             = link_to "Cancel", home_path, class: "btn btn-default"
