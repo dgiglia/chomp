@@ -14,6 +14,7 @@ describe ReviewsController do
         before {post :create, review: Fabricate.attributes_for(:review), business_id: business.id}
           
         it {is_expected.to redirect_to business}
+        it {is_expected.to set_flash[:success]}
         
         it "creates a review" do
           expect(Review.count).to eq(1)

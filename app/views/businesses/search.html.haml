@@ -3,13 +3,4 @@
     %h2= "Results for '#{params[:search_term]}':"
     .row
       - @results.each do |business|
-        .col-sm-4      
-          %h3=link_to business.name, business_path(business) 
-          %p= business.address
-          %p= business.city + ", " + business.state
-          %label Overall Rating
-          %p
-            - business.average_rating.to_i.times do
-              <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
-            #{business.average_rating} / 5 bites
-          %hr
+        = render 'business', business: business
