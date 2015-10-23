@@ -20,23 +20,23 @@
               = f.label "Avatar"
               .row.col-sm-offset-1                
                 .col-sm-2
-                  = f.radio_button :avatar, "/face_icons/man6.png", checked: "checked"
-                  %img.img-responsive(src="/face_icons/man6.png")
+                  = f.radio_button :avatar, "face_icons/man6.png", checked: "checked"
+                  %img.img-responsive{:src => asset_path("face_icons/man6.png")}
                 .col-sm-2
-                  = f.radio_button :avatar, "/face_icons/man5.png"
-                  %img.img-responsive(src="/face_icons/man5.png")
+                  = f.radio_button :avatar, "face_icons/man5.png"
+                  %img.img-responsive{:src => asset_path("face_icons/man5.png")}
                 .col-sm-2
-                  = f.radio_button :avatar, "/face_icons/man1.png"
-                  %img.img-responsive(src="/face_icons/man1.png")
+                  = f.radio_button :avatar, "face_icons/man1.png"
+                  %img.img-responsive{:src => asset_path("face_icons/man1.png")}
                 .col-sm-2
-                  = f.radio_button :avatar, "/face_icons/woman7.png"
-                  %img.img-responsive(src="/face_icons/woman7.png")
+                  = f.radio_button :avatar, "face_icons/woman7.png"
+                  %img.img-responsive{:src => asset_path("face_icons/woman7.png")}
                 .col-sm-2
-                  = f.radio_button :avatar, "/face_icons/woman8.png"
-                  %img.img-responsive(src="/face_icons/woman8.png")
+                  = f.radio_button :avatar, "face_icons/woman8.png"
+                  %img.img-responsive{:src => asset_path("face_icons/woman8.png")}
                 .col-sm-2                  
-                  = f.radio_button :avatar, "/face_icons/woman9.png"
-                  %img.img-responsive(src="/face_icons/woman9.png")
+                  = f.radio_button :avatar, "face_icons/woman9.png"
+                  %img.img-responsive{:src => asset_path("face_icons/woman9.png")}
           %fieldset.actions.control-group.col-sm-offset-2
             = f.submit "Register", class: "btn btn-success"
             = link_to "Cancel", root_path, class: "btn btn-default"

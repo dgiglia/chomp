@@ -2,7 +2,7 @@
   .row
     .col-sm-10.col-sm-offset-1.profile
       .col-sm-3
-        %img.img-responsive(src="#{@user.avatar}") 
+        %img.img-responsive{:src => asset_path("#{@user.avatar}")} 
       .col-sm-5
         %h2= @user.name
         %h4= @user.city + ", " + @user.state 

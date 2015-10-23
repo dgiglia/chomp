@@ -13,6 +13,7 @@ gem 'bootstrap_form'
 gem 'nested_form'
 gem 'autoprefixer-rails'
 
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'pry'
