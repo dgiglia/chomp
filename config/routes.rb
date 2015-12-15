@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   post '/sign_in', to: 'sessions#create'
   get '/sign_out', to: 'sessions#destroy'
   
+  get '/favorites', to: 'favorites#index'
+  resources :favorites, only: [:create, :destroy]
+  
   resources :users, only: [:create, :show]
   resources :categories, only: [:show]
   resources :businesses, only: [:show, :new, :create] do

@@ -1,0 +1,28 @@
+%section.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %article
+        %header
+          %h2 My Favorites
+          %table.table
+            %thead
+              %tr                
+                %th(width="30%") Eatery
+                %th(width="30%") Category
+                %th(width="20%") My rating 
+                %th(width="10%") Recommend
+                %th(width="10%") Remove
+            %tbody
+              - @favorites.each do |item|
+                %tr 
+                  =# hidden_field_tag "favorites[][id]", item.id
+                  %td
+                    = link_to item.business_name, item.business
+                  %td
+                    = link_to item.category_name, item.category
+                  %td
+                    =# select_tag "favorites[][rating]", rating_options(item.rating), include_blank: true
+                  %td
+                    %i.glyphicon.glyphicon-envelope 
+                  %td
+                    %i.glyphicon.glyphicon-remove                  

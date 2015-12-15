@@ -7,6 +7,7 @@
         %h2= @user.name
         %h4= @user.city + ", " + @user.state 
         %hr
+        %button.btn.btn-default Follow Me
         
   .row
     .col-sm-6.col-sm-offset-1
@@ -31,4 +32,8 @@
       %p= latest_chomp(@user)
       %label Total chOMPs
       %p= @user.reviews.count
+      %label Followers
+      %p 36
+      %label Following
+      %p 24
       %hr
