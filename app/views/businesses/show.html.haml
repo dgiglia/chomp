@@ -7,9 +7,9 @@
         %h2= @business.name
         %h4= @business.city + ", " + @business.state 
         %hr
-        %p          
-          %i.glyphicon.glyphicon-heart
-          = link_to "Favorite", favorites_path(business_id: @business.id), method: :post, class: "btn btn-default" 
+        = link_to favorites_path(business_id: @business.id), method: :post, class: "btn btn-default" do
+          %i.glyphicon.glyphicon-heart 
+          Favorite
         
   .row
     .col-sm-6.col-sm-offset-1

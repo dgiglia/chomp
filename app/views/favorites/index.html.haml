@@ -15,14 +15,14 @@
             %tbody
               - @favorites.each do |item|
                 %tr 
-                  =# hidden_field_tag "favorites[][id]", item.id
                   %td
                     = link_to item.business_name, item.business
                   %td
                     = link_to item.category_name, item.category
                   %td
-                    =# select_tag "favorites[][rating]", rating_options(item.rating), include_blank: true
+                    my rating
                   %td
                     %i.glyphicon.glyphicon-envelope 
                   %td
-                    %i.glyphicon.glyphicon-remove                  
+                    = link_to item, method: :delete do
+                      %i.glyphicon.glyphicon-remove                   
