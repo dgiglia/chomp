@@ -24,7 +24,7 @@
               = submit_tag "Go!", class: "btn btn-default"
           %li= link_to "Add A New Eatery", new_business_path   
         %ul.nav.navbar-nav.navbar-right
-          %li= link_to "Connections"
+          %li= link_to "Connections", connections_path
           %li= link_to "Favorites", favorites_path
           %li.dropdown
             %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Welcome #{current_user.name} <span class="caret" aria-hidden="true"></span>

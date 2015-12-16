@@ -34,8 +34,11 @@
       %p= latest_chomp(@user)
       %label Total chOMPs
       %p= @user.reviews.count
+      %label Favorite Eateries
+      %p= @user.favorites.count
       %label Followers
-      %p 36
+      %p= @user.leading_connections.count
       %label Following
-      %p 24
+      %p= @user.following_connections.count
+      
       %hr

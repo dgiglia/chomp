@@ -1,46 +1,58 @@
-%section
-  %header
-    %h2 My Connections
-  %table.table
-    %thead
-      %tr 
-        %th Following
-      %tr
-        %th(width="30%")
-        %th(width="20%") Favorites
-        %th(width="20%") Followers
-        %th(width="30%") Unfollow
-    %tbody
-      -@connections.each do |connection|
-        %tr
-          %td
-            %img.img-responsive{:src => asset_path("#{connection.leader.avatar}")}
-            = link_to connection.leader.name, connection.leader
-          %td.extra-padding 
-            = connection.leader.favorites.count
-          %td.extra-padding 
-            = connection.leader.leading_connections.count
-          %td.extra-padding
-            = link_to connection, method: :delete do
-              %i.glyphicon.glyphicon-remove
-  %table.table
-    %thead
-      %tr 
-        %th Followers
-      %tr
-        %th(width="30%")
-        %th(width="20%") Favorites
-        %th(width="20%") Followers
-        %th(width="30%") 
-    %tbody
-      -@connections.each do |connection|
-        %tr
-          %td
-            %img.img-responsive{:src => asset_path("#{connection.follower.avatar}")}
-            = link_to connection.follower.name, connection.follower
-          %td.extra-padding 
-            = connection.follower.favorites.count
-          %td.extra-padding 
-            = connection.follower.leading_connections.count
-          %td.extra-padding
- 
+%section.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %article
+        %header
+          %h2 My Connections
+          %hr
+          %button.btn.btn-default
+            %i.glyphicon.glyphicon-envelope 
+            Invite Friend
+        %br    
+        %table.table
+          %thead
+            %tr 
+              %h4 Following
+            %tr
+              %th(width="10%")
+              %th(width="30%")
+              %th(width="15%") Favorites
+              %th(width="15%") Followers
+              %th(width="15%") Unfollow
+          %tbody
+            -@connections.each do |connection|
+              %tr
+                %td
+                  %img.img-responsive{:src => asset_path("#{connection.leader.avatar}")}
+                %td
+                  = link_to connection.leader.name, connection.leader
+                %td.extra-padding 
+                  = connection.leader.favorites.count
+                %td.extra-padding 
+                  = connection.leader.leading_connections.count
+                %td.extra-padding
+                  = link_to connection, method: :delete do
+                    %i.glyphicon.glyphicon-remove
+        %br        
+        %table.table
+          %thead
+            %tr 
+              %h4 Followers
+            %tr
+              %th(width="10%")
+              %th(width="30%")
+              %th(width="15%") Favorites
+              %th(width="15%") Followers
+              %th(width="15%")  
+          %tbody
+            -@inverse_connections.each do |connection|
+              %tr
+                %td
+                  %img.img-responsive{:src => asset_path("#{connection.follower.avatar}")}
+                %td
+                  = link_to connection.follower.name, connection.follower
+                %td.extra-padding 
+                  = connection.follower.favorites.count
+                %td.extra-padding 
+                  = connection.follower.leading_connections.count
+                %td.extra-padding
