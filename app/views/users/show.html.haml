@@ -7,7 +7,9 @@
         %h2= @user.name
         %h4= @user.city + ", " + @user.state 
         %hr
-        %button.btn.btn-default Follow Me
+        = link_to connections_path(leader_id: @user.id), method: :post, class: "btn btn-default" do
+          %i.glyphicon.glyphicon-plus 
+          Follow Me
         
   .row
     .col-sm-6.col-sm-offset-1

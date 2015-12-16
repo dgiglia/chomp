@@ -1,0 +1,2 @@
+Fabricator(:connection) do
+end

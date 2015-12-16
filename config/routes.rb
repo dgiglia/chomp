@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get '/favorites', to: 'favorites#index'
   resources :favorites, only: [:create, :destroy]
   
+  get '/connections', to: 'connections#index'
+  resources :connections, only: [:create, :destroy]
+  
   resources :users, only: [:create, :show]
   resources :categories, only: [:show]
   resources :businesses, only: [:show, :new, :create] do
