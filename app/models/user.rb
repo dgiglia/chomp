@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-  has_many :reviews
-  has_many :favorites
-  has_many :following_connections, class_name: "Connection", foreign_key: "follower_id"
-  has_many :leading_connections, class_name: "Connection", foreign_key: "leader_id"
+  has_many :reviews, -> {order("created_at DESC")}
+  has_many :favorites, -> {order("created_at DESC")}
+  has_many :following_connections, -> {order("created_at DESC")}, class_name: "Connection", foreign_key: "follower_id"
+  has_many :leading_connections, -> {order("created_at DESC")}, class_name: "Connection", foreign_key: "leader_id"
   has_secure_password validations: false
   
   validates_presence_of :email, :password, :name, :city, :state

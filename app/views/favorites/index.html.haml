@@ -8,8 +8,8 @@
             %thead
               %tr                
                 %th(width="30%") Eatery
-                %th(width="30%") Category
-                %th(width="20%") My rating 
+                %th(width="20%") Category
+                %th(width="20%") Overall Rating 
                 %th(width="10%") Recommend
                 %th(width="10%") Remove
             %tbody
@@ -20,7 +20,9 @@
                   %td
                     = link_to item.category_name, item.category
                   %td
-                    = select_tag "favorites[][rating]", rating_options(item.rating), include_blank: true
+                    - item.business.average_rating.to_i.times do
+                      <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
+                    #{item.business.average_rating} / 5 bites
                   %td
                     %i.glyphicon.glyphicon-envelope 
                   %td

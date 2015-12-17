@@ -8,7 +8,7 @@ describe FavoritesController do
       favorite1 = Fabricate(:favorite, user: john)
       favorite2 = Fabricate(:favorite, user: john)
       get :index
-      expect(assigns(:favorites)).to eq([favorite1, favorite2])
+      expect(assigns(:favorites)).to eq([favorite2, favorite1])
     end
     
     it_behaves_like "require sign in" do

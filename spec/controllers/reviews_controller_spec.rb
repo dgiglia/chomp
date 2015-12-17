@@ -26,7 +26,7 @@ describe ReviewsController do
         
         it "creates review associated with the user" do
           expect(Review.first.user).to eq(jenkins)
-        end        
+        end                
       end
       
       context "with invalid input" do
