@@ -12,8 +12,9 @@ gem 'bcrypt', '~> 3.1.10'
 gem 'bootstrap_form'
 gem 'nested_form'
 gem 'autoprefixer-rails'
-
-gem 'rails_12factor', group: :production
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'figaro'
 
 group :development, :test do
   gem 'pry'
@@ -27,4 +28,9 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'database_cleaner', '1.2.0'
+end
+
+group :production, :staging do
+  gem 'rails_12factor'
+  gem 'carrierwave-aws'
 end

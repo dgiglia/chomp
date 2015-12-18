@@ -20,6 +20,7 @@
           %fieldset
             = f.select :rating, rating_options, label: "Rating"
             = f.text_area :comment, rows: 6, label: "Comments"
+            = f.file_field :review_photo, class: 'btn btn-file'
           %fieldset.form-group.actions
             = f.submit "Add", class: "btn btn-success col-sm-offset-2"
             = link_to "Cancel", @business, class: "btn btn-default"
@@ -31,6 +32,7 @@
             <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
           #{review.rating} / 5 bites
         %p= review.comment
+        %img.img-responsive{:src => asset_path("#{review.review_photo}")}
         %p.quiet 
           Reviewed by:
           = link_to review.user.name, user_path(review.user) 
