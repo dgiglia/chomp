@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Tokenable
+  
   has_many :reviews, -> {order("created_at DESC")}
   has_many :favorites, -> {order("created_at DESC")}
   has_many :following_connections, -> {order("created_at DESC")}, class_name: "Connection", foreign_key: "follower_id"

@@ -1,0 +1,7 @@
+!!! 5
+%html(lang="en-US")
+  %body
+    %p Your friend, #{@recommendation.sender.name} would like to recommend #{@recommendation.business.name}! Check it out: 
+    %p= link_to @recommendation.business.name, business_path(@recommendation.business)
+    %p #{@recommendation.sender.name}'s personal message to you:
+    %p= @recommendation.message

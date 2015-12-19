@@ -25,4 +25,11 @@ Rails.application.routes.draw do
   
   resources :reviews, only: [:index]
   
+  get '/forgot_password', to: 'forgot_passwords#new'
+  get '/forgot_password_confirmation', to: 'forgot_passwords#confirm'
+  resources :forgot_passwords, only: [:create]
+  
+  resources :password_resets, only: [:show, :create]
+  get '/expired_token', to: 'pages#expired_token'
+  
 end
