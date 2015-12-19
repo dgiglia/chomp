@@ -14,4 +14,20 @@ describe User do
   it_behaves_like "tokenable" do
     let(:object) {Fabricate(:user)}
   end
+  
+  describe "#follow" do
+    let(:user) {Fabricate(:user)}
+    
+    it "follows another user" do
+      holly = Fabricate(:user)
+      holly.follow(user)
+      expect(holly.follows?(user)).to be true
+    end
+    
+    it "does not follow oneself" do
+      holly = Fabricate(:user)
+      holly.follow(holly)
+        expect(holly.follows?(holly)).to be false
+    end
+  end
 end

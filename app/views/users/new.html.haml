@@ -6,6 +6,7 @@
           %h1 Register
         = bootstrap_form_for(@user) do |f|
           %fieldset
+            = hidden_field_tag :invitation_token, @invitation_token
             .form-group.col-sm-11
               = f.email_field :email, layout: :horizontal
             .form-group.col-sm-11

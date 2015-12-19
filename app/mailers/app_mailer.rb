@@ -6,6 +6,11 @@ class AppMailer < ActionMailer::Base
     mail to: user.email, subject: "Welcome to chOMP!"
   end
   
+  def send_inviter_email_confirming_acceptance(invitation)
+    @invitation = invitation
+    mail to: invitation.inviter.email, subject: "Your friend has joined chOMP!"
+  end
+  
   def send_forgot_password(user)
     @user = user
     mail to: user.email, subject: "Please reset your password."

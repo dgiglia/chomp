@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :password, :name, :city, :state
   validates_uniqueness_of :email 
   
+  def follow(another_user)
+    following_connections.create(leader: another_user) if can_follow?(another_user)
+  end
+  
   def can_follow?(another_user)
     !(self.follows?(another_user) || another_user == self)
   end

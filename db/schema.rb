@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151219013204) do
+ActiveRecord::Schema.define(version: 20151219042320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(version: 20151219013204) do
   create_table "favorites", force: :cascade do |t|
     t.integer  "business_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.string   "recipient_name"
+    t.string   "recipient_email"
+    t.text     "message"
+    t.string   "token"
+    t.integer  "inviter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

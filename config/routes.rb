@@ -32,4 +32,7 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:show, :create]
   get '/expired_token', to: 'pages#expired_token'
   
+  resources :invitations, only: [:new, :create]
+  get '/register/:token', to: 'users#new_with_invitation_token', as: 'register_with_token'
+  
 end
