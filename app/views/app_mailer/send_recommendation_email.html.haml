@@ -1,0 +1,11 @@
+!!! 5
+%html(lang="en-US")
+  %body
+    %p You've been invited by #{@recommendation.sender.name} to check out #{@recommendation.business.name} on chOMP! Click the link below for information about the business and reviews!
+    %p= link_to "#{@recommendation.business.name}'s Business Profile", business_url(@recommendation.business)
+    %p #{@recommendation.sender.name}'s personal message to you:
+    %p= @recommendation.message
+    %br
+    %p Not a chOMP user? Join today!
+    %p= link_to "Register", register_url
+

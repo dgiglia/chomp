@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151012225428) do
+ActiveRecord::Schema.define(version: 20151222021847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,40 @@ ActiveRecord::Schema.define(version: 20151012225428) do
     t.datetime "updated_at"
   end
 
+  create_table "connections", force: :cascade do |t|
+    t.integer  "leader_id"
+    t.integer  "follower_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "business_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.string   "recipient_name"
+    t.string   "recipient_email"
+    t.text     "message"
+    t.string   "token"
+    t.integer  "inviter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "recommendations", force: :cascade do |t|
+    t.string   "recipient_name"
+    t.string   "recipient_email"
+    t.text     "message"
+    t.integer  "sender_id"
+    t.integer  "business_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.text     "comment"
     t.integer  "rating"
@@ -40,6 +74,7 @@ ActiveRecord::Schema.define(version: 20151012225428) do
     t.integer  "business_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "review_photo"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,6 +86,7 @@ ActiveRecord::Schema.define(version: 20151012225428) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "token"
   end
 
 end

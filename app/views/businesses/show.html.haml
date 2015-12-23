@@ -7,31 +7,43 @@
         %h2= @business.name
         %h4= @business.city + ", " + @business.state 
         %hr
+        -if signed_in?
+          = link_to favorites_path(business_id: @business.id), method: :post, class: "btn btn-default" do
+            %i.glyphicon.glyphicon-heart 
+            Favorite
+          = link_to new_recommendation_path(business_id: @business.id), class: "btn btn-default" do
+            %i.glyphicon.glyphicon-envelope 
+            Recommend
+          
   .row
     .col-sm-6.col-sm-offset-1
-      .well
-        %header
-          %h4 Add your chOMP
-        = bootstrap_nested_form_for [@business, Review.new], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10' do |f|
-          %fieldset
-            = f.select :rating, rating_options, label: "Rating"
-            = f.text_area :comment, rows: 6, label: "Comments"
-          %fieldset.form-group.actions
-            = f.submit "Add", class: "btn btn-success col-sm-offset-2"
-            = link_to "Cancel", @business, class: "btn btn-default"
-        
-      %h4 #{@business.name}'s chOMPs
-      - @reviews.each do |review|
-        %p 
-          - review.rating.times do
-            <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
-          #{review.rating} / 5 bites
-        %p= review.comment
-        %p.quiet 
-          Reviewed by:
-          = link_to review.user.name, user_path(review.user) 
-          on #{display_datetime(review.created_at)}
-        %hr
+      %p= link_to "Must be signed in to see reviews. Please sign in.", sign_in_path unless signed_in?
+      - if signed_in?
+        .well
+          %header
+            %h4 Add your chOMP
+          = bootstrap_nested_form_for [@business, Review.new], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10' do |f|
+            %fieldset
+              = f.select :rating, rating_options, label: "Rating"
+              = f.text_area :comment, rows: 6, label: "Comments"
+              = f.file_field :review_photo, class: 'btn btn-file'
+            %fieldset.form-group.actions
+              = f.submit "Add", class: "btn btn-success col-sm-offset-2"
+              = link_to "Cancel", @business, class: "btn btn-default"
+
+        %h4 #{@business.name}'s chOMPs
+        - @reviews.each do |review|
+          %p 
+            - review.rating.times do
+              <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
+            #{review.rating} / 5 bites
+          %p= review.comment
+          %img.img-responsive{:src => asset_path("#{review.review_photo}")}
+          %p.quiet 
+            Reviewed by:
+            = link_to review.user.name, user_path(review.user) 
+            on #{display_datetime(review.created_at)}
+          %hr
     .col-sm-3.col-sm-offset-1
       %h4 About #{@business.name}
       %label Location
@@ -42,7 +54,7 @@
       %label Category
       %p= @business.category.name
       %label Website
-      %p= fix_url(@business.url)
+      %p= link_to fix_url(@business.url)
       %hr
       %label Overall Rating
       %p

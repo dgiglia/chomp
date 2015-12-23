@@ -7,12 +7,15 @@
         %h2= @user.name
         %h4= @user.city + ", " + @user.state 
         %hr
+        = link_to connections_path(leader_id: @user.id), method: :post, class: "btn btn-default" do
+          %i.glyphicon.glyphicon-plus 
+          Follow Me
         
   .row
     .col-sm-6.col-sm-offset-1
-      %h4 My chOMPs
+      %h4 Recent chOMPs
       .row
-        - @user.reviews.each do |review|
+        - @user.reviews.limit(6).each do |review|
           .col-sm-6
             %label= link_to review.business.name, business_path(review.business)
             %p 
@@ -21,6 +24,18 @@
               #{review.rating} / 5 bites
             %p= review.comment
             %hr 
+      %h4 Recent Favorites
+      .row
+        - @user.favorites.limit(6).each do |favorite|
+          .col-sm-6
+            %label= link_to favorite.business_name, favorite.business
+      %hr
+      %h4 Recent Connections      
+      .row
+        - @user.following_connections.limit(6).each do |connection|
+          .col-sm-6
+            %label= link_to connection.leader.name, connection.leader
+            
     .col-sm-3.col-sm-offset-1
       %h4 About #{@user.name}
       %label Location
@@ -31,4 +46,11 @@
       %p= latest_chomp(@user)
       %label Total chOMPs
       %p= @user.reviews.count
+      %label Favorite Eateries
+      %p= @user.favorites.count
+      %label Followers
+      %p= @user.leading_connections.count
+      %label Following
+      %p= @user.following_connections.count
+      
       %hr

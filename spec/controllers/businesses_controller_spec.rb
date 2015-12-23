@@ -40,10 +40,6 @@ describe BusinessesController do
       get :show, id: business.id
       expect(assigns(:reviews)).to match_array([review1, review2])
     end
-    
-    it_behaves_like "require sign in" do
-      let(:action) {get :show, id: business.id}
-    end
   end
   
   describe "GET search" do
@@ -53,10 +49,6 @@ describe BusinessesController do
     it "sets @results for authenticated user" do
       get :search, search_term: 'chic'
       expect(assigns(:results)).to eq([flipper])
-    end
-    
-    it_behaves_like "require sign in" do
-      let(:action) {get :search, search_term: 'doc'}
     end
   end
   

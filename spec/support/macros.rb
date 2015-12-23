@@ -1,5 +1,5 @@
-def set_current_user  
-  session[:user_id] = Fabricate(:user).id
+def set_current_user(user=nil)  
+  session[:user_id] = (user || Fabricate(:user).id)
 end
 
 def current_user
@@ -16,4 +16,8 @@ def sign_in(user=nil)
   fill_in "Email", with: user.email
   fill_in "Password", with: user.password
   click_button "Sign In"
+end
+
+def sign_out
+  visit sign_out_path
 end

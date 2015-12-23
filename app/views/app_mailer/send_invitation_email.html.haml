@@ -1,0 +1,9 @@
+!!! 5
+%html(lang="en-US")
+  %body
+    %p You've been invited by #{@invitation.inviter.name} to join chOMP! Check out and review local restaurants. Create a list of your favorites and connect with others who share your taste!
+    %p #{@invitation.inviter.name}'s personal message to you:
+    %p= @invitation.message
+    %br
+    %p Join today!
+    %p= link_to "Accept this invitation", register_with_token_url(@invitation.token)
