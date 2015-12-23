@@ -24,7 +24,8 @@
                       <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
                     #{item.business.average_rating} / 5 bites
                   %td
-                    %i.glyphicon.glyphicon-envelope 
+                    = link_to new_recommendation_path(business_id: item.business.id) do
+                      %i.glyphicon.glyphicon-envelope 
                   %td
                     = link_to item, method: :delete do
                       %i.glyphicon.glyphicon-remove                   

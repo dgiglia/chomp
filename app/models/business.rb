@@ -1,6 +1,7 @@
 class Business < ActiveRecord::Base
   has_many :reviews, -> {order("created_at DESC")}
   has_many :favorites
+  has_many :recommendations
   belongs_to :category
   
   validates_presence_of :name, :city, :state

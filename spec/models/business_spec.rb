@@ -4,6 +4,7 @@ describe Business do
   it { is_expected.to have_many(:reviews).order("created_at DESC") }
   it { is_expected.to belong_to(:category) }
   it { is_expected.to have_many(:favorites) }
+  it { is_expected.to have_many(:recommendations) }
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_uniqueness_of(:name) }
   it { is_expected.to validate_presence_of(:city) }

@@ -1,5 +1,5 @@
 class BusinessesController < ApplicationController
-  before_action :require_user
+  before_action :require_user, only: [:create, :new]
   
   def new
     @business = Business.new

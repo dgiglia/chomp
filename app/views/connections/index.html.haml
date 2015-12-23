@@ -5,9 +5,9 @@
         %header
           %h2 My Connections
           %hr
-          %button.btn.btn-default
+          = link_to new_invitation_path, class: "btn btn-default" do
             %i.glyphicon.glyphicon-envelope 
-            = link_to "Invite Friend", new_invitation_path
+            Invite Friend
         %br    
         %table.table
           %thead

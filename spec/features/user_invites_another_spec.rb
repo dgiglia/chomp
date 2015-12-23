@@ -16,7 +16,7 @@ feature "User invites friend" do
     click_link "My Connections"
     click_link "Invite Friend"
     expect(page).to have_content ("Invite a friend to join chOMP!")
-    fill_in "invitation[recipient_name]", with: "Sam"
+    fill_in "Friend's Name", with: "Sam"
     fill_in "Friend's Email Address", with: "sam@example.com"
     fill_in "Invitation Message", with: "Please join me."
     click_button "Send Invitation"
