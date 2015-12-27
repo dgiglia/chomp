@@ -5,4 +5,9 @@ Fabricator(:user) do
   state {Faker::Address.state}
   password 'password'
   avatar {"/assets/face_icons/man6.png"}
+  admin false
+end
+
+Fabricator(:admin, from: :user) do
+  admin true
 end

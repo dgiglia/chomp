@@ -1,9 +1,8 @@
 class BusinessesController < ApplicationController
-  before_action :require_user, only: [:create, :new]
   
-  def new
-    @business = Business.new
-  end
+#   def new
+#     @business = Business.new
+#   end
   
   def index
     @businesses = Business.all.sort_by(&:name)
@@ -14,22 +13,22 @@ class BusinessesController < ApplicationController
     @reviews = @business.reviews
   end
   
-  def create
-    @business = Business.new(business_params)
-    if @business.save
-      flash['success'] = "The business was successfully created."
-      redirect_to home_path
-    else
-      render :new
-    end
-  end
+#   def create
+#     @business = Business.new(business_params)
+#     if @business.save
+#       flash['success'] = "The business was successfully created."
+#       redirect_to home_path
+#     else
+#       render :new
+#     end
+#   end
   
   def search
     @results = Business.search_by_city(params[:search_term])
   end  
   
-  private
-  def business_params
-    params.require(:business).permit(:name, :address, :city, :state, :url, :category_id)
-  end
+#   private
+#   def business_params
+#     params.require(:business).permit(:name, :address, :city, :state, :url, :category_id)
+#   end
 end

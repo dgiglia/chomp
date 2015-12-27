@@ -4,7 +4,7 @@
       .well
         %header
           %h1 Add a New Business
-        = bootstrap_form_for(@business) do |f|
+        = bootstrap_form_for [:admin, @business] do |f|
           %fieldset
             .form-group.col-sm-11
               = f.text_field :name, label: "Name", layout: :horizontal
