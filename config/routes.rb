@@ -13,11 +13,11 @@ Rails.application.routes.draw do
   
   resources :users, only: [:create, :show]
   namespace :admin do
-    resources :businesses, only: [:create, :new, :update, :destroy]
-    resources :reviews, only: [:edit, :destroy]
-    resources :replies, only: [:edit, :destroy]
+    resources :businesses, only: [:create, :new, :update, :edit, :destroy]
+    resources :reviews, only: [:edit, :update, :destroy]
+    resources :replies, only: [:edit, :update, :destroy]
     resources :categories, only: [:create, :new]
-    resources :users, only: [:edit, :destroy]
+    resources :users, only: [:destroy]
   end
 #   namespace :owner do
 #     resources :businesses, only: [:update] do

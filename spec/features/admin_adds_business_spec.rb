@@ -11,7 +11,7 @@ feature "User adds business" do
     sign_in(jane)
     click_link "Add A New Eatery"
     fill_in_business_form
-    click_button "Add"
+    click_button "Submit"
 
     expect(page).to have_content "The business was successfully created."
   end

@@ -22,8 +22,6 @@
             = submit_tag "Go!", class: "btn btn-default"
         -if signed_in?      
           %li= link_to "chOMPs", reviews_path  
-        -if signed_in? && admin?  
-          %li= link_to "Add A New Eatery", new_admin_business_path
       %ul.nav.navbar-nav.navbar-right
         -if signed_in?
           %li.dropdown
@@ -32,5 +30,9 @@
               %li= link_to "My Profile", user_path(current_user.id)
               %li= link_to "My Connections", connections_path
               %li= link_to "My Favorites", favorites_path
+              %li.divider(role="separator")
+              -if admin?  
+                %li= link_to "Add A New Eatery", new_admin_business_path
+                %li= link_to "Add a New Category", new_admin_category_path
               %li.divider(role="separator")
               %li= link_to "Sign Out", sign_out_path 
