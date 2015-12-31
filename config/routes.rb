@@ -20,8 +20,8 @@ Rails.application.routes.draw do
     resources :users, only: [:destroy]
   end
 #   namespace :owner do
-#     resources :businesses, only: [:update] do
-#       resources :replies, only: [:create]
+  #     resources :businesses, only: [:edit, :update] do
+  #       resources :replies, only: [:new, :create]
 #     end
 #   end
   
