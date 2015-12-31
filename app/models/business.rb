@@ -1,6 +1,6 @@
 class Business < ActiveRecord::Base
-  has_many :reviews, -> {order("created_at DESC")}
-  has_many :favorites
+  has_many :reviews, -> {order("created_at DESC")}, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   has_many :recommendations
   belongs_to :category
   

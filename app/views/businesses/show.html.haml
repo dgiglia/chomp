@@ -14,6 +14,14 @@
           = link_to new_recommendation_path(business_id: @business.id), class: "btn btn-default" do
             %i.glyphicon.glyphicon-envelope 
             Recommend
+        - if signed_in? && admin?
+          %hr
+          = link_to edit_admin_business_path(@business), class: "btn btn-default" do
+            %i.glyphicon.glyphicon-pencil 
+            Edit Business
+          = link_to admin_business_path(@business), method: :delete, class: "btn btn-danger" do
+            %i.glyphicon.glyphicon-remove 
+            Delete Business
           
   .row
     .col-sm-6.col-sm-offset-1
@@ -33,7 +41,15 @@
 
         %h4 #{@business.name}'s chOMPs
         - @reviews.each do |review|
-          %p 
+          - if signed_in? && admin?
+            = link_to edit_admin_review_path(review), class: "btn btn-default btn-xs" do
+              %i.glyphicon.glyphicon-pencil 
+              Edit Review
+            = link_to admin_review_path(review), method: :delete, class: "btn btn-danger btn-xs" do
+              %i.glyphicon.glyphicon-remove 
+              Delete Review 
+            %p
+          %p
             - review.rating.times do
               <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
             #{review.rating} / 5 bites

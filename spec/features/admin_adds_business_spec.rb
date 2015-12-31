@@ -6,11 +6,12 @@ feature "User adds business" do
     cat2 = Fabricate(:category, name: "two")
     cat3 = Fabricate(:category, name: "three")
     cat4 = Fabricate(:category, name: "four")
+    jane = Fabricate(:admin)
     
-    sign_in
+    sign_in(jane)
     click_link "Add A New Eatery"
     fill_in_business_form
-    click_button "Add"
+    click_button "Submit"
 
     expect(page).to have_content "The business was successfully created."
   end

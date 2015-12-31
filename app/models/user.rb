@@ -1,11 +1,11 @@
 class User < ActiveRecord::Base
   include Tokenable
   
-  has_many :reviews, -> {order("created_at DESC")}
-  has_many :favorites, -> {order("created_at DESC")}
+  has_many :reviews, -> {order("created_at DESC")}, dependent: :destroy
+  has_many :favorites, -> {order("created_at DESC")}, dependent: :destroy
   has_many :recommendations, foreign_key: "sender_id"
-  has_many :following_connections, -> {order("created_at DESC")}, class_name: "Connection", foreign_key: "follower_id"
-  has_many :leading_connections, -> {order("created_at DESC")}, class_name: "Connection", foreign_key: "leader_id"
+  has_many :following_connections, -> {order("created_at DESC")}, class_name: "Connection", foreign_key: "follower_id", dependent: :destroy
+  has_many :leading_connections, -> {order("created_at DESC")}, class_name: "Connection", foreign_key: "leader_id", dependent: :destroy
   has_secure_password validations: false
   
   validates_presence_of :email, :password, :name, :city, :state

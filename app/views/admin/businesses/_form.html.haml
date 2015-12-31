@@ -1,0 +1,17 @@
+= bootstrap_form_for [:admin, @business] do |f|
+  %fieldset
+    .form-group.col-sm-11
+      = f.text_field :name, label: "Name", layout: :horizontal
+    .form-group.col-sm-11
+      = f.text_field :address, label: "Address", layout: :horizontal
+    .form-group.col-sm-11
+      = f.text_field :city, label: "City", layout: :horizontal
+    .form-group.col-sm-11
+      = f.text_field :state, label: "State", layout: :horizontal
+    .form-group.col-sm-11
+      = f.text_field :url, label: "Website", layout: :horizontal
+    .form-group.col-sm-11
+      = f.collection_select :category_id, Category.order(:name), :id, :name
+  %fieldset.actions.control-group.col-sm-offset-2
+    = f.submit "Submit", class: "btn btn-success"
+    = link_to "Cancel", home_path, class: "btn btn-default"
