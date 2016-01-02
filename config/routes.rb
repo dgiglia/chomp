@@ -12,8 +12,14 @@ Rails.application.routes.draw do
   get '/sign_out', to: 'sessions#destroy'
   
   resources :users, only: [:create, :show]
+ 
   namespace :admin do
-    resources :businesses, only: [:create, :new, :update, :edit, :destroy]
+    get '/admin_panel', to: 'pages#admin_panel'
+    resources :businesses, only: [:update, :edit, :destroy] do
+      member do
+        patch :approve_business
+      end
+    end
     resources :reviews, only: [:edit, :update, :destroy]
     resources :replies, only: [:edit, :update, :destroy]
     resources :categories, only: [:create, :new]

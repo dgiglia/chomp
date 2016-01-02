@@ -1,0 +1,62 @@
+%section.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %article
+        %header
+          %h2 Admin Panel
+          %hr
+          
+        %br    
+        %table.table
+          %thead
+            %tr 
+              %h4 Businesses Pending Approval
+            %tr
+              %th(width="20%") Name
+              %th(width="20%") City, State
+              %th(width="40%") URL
+              %th(width="10%") Approve
+              %th(width="10%") Deny
+          %tbody
+            -@businesses.each do |business|
+              %tr              
+                %td.extra-padding
+                  = business.name
+                %td.extra-padding
+                  = business.city + ", " + business.state
+                %td.extra-padding 
+                  = link_to fix_url(business.url) if business.url
+                %td.extra-padding 
+                  = link_to approve_business_admin_business_path(id: business.id), method: :patch do
+                    %i.glyphicon.glyphicon-ok
+                    Approve
+                %td.extra-padding     
+                  = link_to [:admin, business], method: :delete do
+                    %i.glyphicon.glyphicon-remove
+                    Deny
+        %br        
+        %table.table
+          %thead
+            %tr 
+              %h4 Business Owners Pending Approval
+            %tr
+              %th(width="20%") User
+              %th(width="20%") Business
+              %th(width="20%") Contact Info
+              %th(width="10%") 
+              %th(width="30%") Action
+          %tbody
+            -# @claims.each do |claim|
+              %tr
+                %td
+                  = claim.user.name
+                %td
+                  = claim.business.name
+                %td.extra-padding 
+                  = claim.contact
+                %td.extra-padding 
+                  
+                %td.extra-padding
+                  = link_to approve_claim_path(business: claim.business.id, owner: claim.user.id), method: :post do
+                    %i.glyphicon.glyphicon-ok
+                    Approve

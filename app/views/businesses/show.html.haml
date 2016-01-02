@@ -70,7 +70,7 @@
       %label Category
       %p= @business.category.name
       %label Website
-      %p= link_to fix_url(@business.url)
+      %p= link_to fix_url(@business.url) if @business.url
       %hr
       %label Overall Rating
       %p
