@@ -2,6 +2,8 @@ class Business < ActiveRecord::Base
   has_many :reviews, -> {order("created_at DESC")}, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :recommendations
+  has_many :owners, through: :business_ownerships
+  has_many :business_ownerships, dependent: :destroy
   belongs_to :category
   
   validates_presence_of :name, :city, :state
@@ -16,4 +18,8 @@ class Business < ActiveRecord::Base
     return [] if search_term.blank?
     where("city ILIKE ?", "%#{search_term}%").order("name ASC")
   end
+  
+  def owned?
+    business_ownerships.where(approved: true).any?
+  end  
 end

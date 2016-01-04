@@ -25,4 +25,14 @@ class AppMailer < ActionMailer::Base
     @recommendation = recommendation
     mail to: recommendation.recipient_email, subject: "Recommendation on chOMP."
   end
+  
+  def send_claim_submitted_email(business_ownership)
+    @business_ownership = business_ownership
+    mail to: business_ownership.owner.email, subject: "Business Claim Submitted"
+  end
+  
+  def send_claim_approved_email(business_ownership)
+    @business_ownership = business_ownership
+    mail to: business_ownership.owner.email, subject: "Business Claim Approved"
+  end
 end

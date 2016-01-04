@@ -32,7 +32,11 @@
               %li= link_to "My Connections", connections_path
               %li= link_to "My Favorites", favorites_path
               %li.divider(role="separator")
+              - if current_user.business_owner?
+                %li= link_to "Owner Admin Panel", business_owner_admin_panel_path
+                %li.divider(role="separator")
               -if admin?
                 %li= link_to "Add a New Category", new_admin_category_path
-              %li.divider(role="separator")
+                %li= link_to "Admin Panel", admin_admin_panel_path
+                %li.divider(role="separator")
               %li= link_to "Sign Out", sign_out_path 

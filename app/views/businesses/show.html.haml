@@ -81,5 +81,10 @@
       %p= latest_chomp(@business)
       %label Total chOMPs
       %p= @business.reviews.count
+      %br
+      - unless @business.owned?
+        = link_to new_business_ownership_path(business_id: @business.id), class: "btn btn-default" do
+          %i.glyphicon.glyphicon-flag 
+          Claim This Business
       %hr
       

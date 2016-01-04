@@ -1,9 +1,9 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe RecommendationsController do
+describe BusinessOwnershipsController do  
   it {is_expected.to use_before_action(:require_user)}
   
-  describe "GET new" do
+  describe "GET new" do  
     let(:cat) {Fabricate(:category)}
     let(:business) {Fabricate(:business, category: cat)}
     before do
@@ -11,8 +11,8 @@ describe RecommendationsController do
       get :new, business_id: business.id
     end
     
-    it "sets @recommendation to a new recommendation" do
-      expect(assigns(:recommendation)).to be_a_new(Recommendation)
+    it "sets @business_ownership to a new ownership" do
+      expect(assigns(:business_ownership)).to be_a_new(BusinessOwnership)
     end
     
     it "sets @business to the business" do
@@ -35,33 +35,35 @@ describe RecommendationsController do
       let(:jane) {Fabricate(:user)}
       before do
         set_current_user(jane)
-        post :create, recommendation: {recipient_email: "holly@example.com", recipient_name: "Holly"}, business_id: business.id
+        post :create, business_ownership: Fabricate.attributes_for(:business_ownership), business_id: business.id
+      end
+      after {ActionMailer::Base.deliveries.clear}
+      
+      it "creates a business_ownership associated with the business" do
+        expect(BusinessOwnership.first.business_id).to eq(business.id)
       end
       
-      it "creates a recommendation associated with the business" do
-        expect(Recommendation.first.business_id).to eq(business.id)
-      end
-      
-      it "creates a recommendation assocuated with the signed in user" do
-        expect(Recommendation.first.sender_id).to eq(jane.id)
+      it "creates a business_ownership associated with the signed in user" do
+        expect(BusinessOwnership.first.owner_id).to eq(jane.id)
       end
     end
     
     context "with valid input" do
       let(:cat) {Fabricate(:category)}
       let(:business) {Fabricate(:business, category: cat)}
+      let(:jim) {Fabricate(:user)}
       before do
-        set_current_user
-        post :create, recommendation: {recipient_email: "holly@example.com", recipient_name: "Holly"}, business_id: business.id
+        set_current_user(jim)
+        post :create, business_ownership: Fabricate.attributes_for(:business_ownership), business_id: business.id
       end
       after {ActionMailer::Base.deliveries.clear}
       
-      it "creates a recommendation" do
-        expect(Recommendation.count).to eq(1)
+      it "creates a business_ownership" do
+        expect(BusinessOwnership.count).to eq(1)
       end
       
-      it "sends an email to the recipient" do
-        expect(ActionMailer::Base.deliveries.last.to).to eq(["holly@example.com"])
+      it "sends an email to the owner" do
+        expect(ActionMailer::Base.deliveries.last.to).to eq([jim.email])
       end
       
       it {is_expected.to redirect_to business_path(business)}
@@ -74,20 +76,20 @@ describe RecommendationsController do
       let(:business) {Fabricate(:business, category: cat)}
       before do
         set_current_user
-        post :create, recommendation: {recipient_name: "Holly"}, business_id: business.id
+        post :create, business_ownership: {contact_phone: "1234567890"}, business_id: business.id
       end
       after {ActionMailer::Base.deliveries.clear}
       
-      it "does not create a recommendation" do
-        expect(Recommendation.count).to eq(0)
+      it "does not create a business_ownership" do
+        expect(BusinessOwnership.count).to eq(0)
       end
       
       it "does not send an email" do
         expect(ActionMailer::Base.deliveries).to be_empty
       end
       
-      it "sets @recommendation" do
-        expect(assigns(:recommendation)).to be_present
+      it "sets @business_ownership" do
+        expect(assigns(:business_ownership)).to be_present
       end
       
       it {is_expected.to render_template(:new)}

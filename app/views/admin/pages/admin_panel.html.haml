@@ -38,25 +38,31 @@
         %table.table
           %thead
             %tr 
-              %h4 Business Owners Pending Approval
+              %h4 Business Ownerships Pending Approval
             %tr
-              %th(width="20%") User
-              %th(width="20%") Business
+              %th(width="15%") User
+              %th(width="15%") Business
               %th(width="20%") Contact Info
-              %th(width="10%") 
-              %th(width="30%") Action
+              %th(width="30%") Message
+              %th(width="10%") Approve
+              %th(width="10%") Deny
           %tbody
-            -# @claims.each do |claim|
+            - @business_ownerships.each do |claim|
               %tr
                 %td
-                  = claim.user.name
+                  = claim.owner.name
                 %td
                   = claim.business.name
                 %td.extra-padding 
-                  = claim.contact
+                  = claim.contact_phone
+                  = claim.contact_address
                 %td.extra-padding 
-                  
+                  = claim.message
                 %td.extra-padding
-                  = link_to approve_claim_path(business: claim.business.id, owner: claim.user.id), method: :post do
+                  = link_to approve_admin_business_ownership_path(id: claim.id, owner: claim.owner.id), method: :patch do
                     %i.glyphicon.glyphicon-ok
                     Approve
+                %td.extra-padding     
+                  = link_to [:admin, claim], method: :delete do
+                    %i.glyphicon.glyphicon-remove
+                    Deny

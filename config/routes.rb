@@ -20,16 +20,22 @@ Rails.application.routes.draw do
         patch :approve_business
       end
     end
+    resources :business_ownerships, only: [:destroy] do
+      member do
+        patch :approve
+      end
+    end
     resources :reviews, only: [:edit, :update, :destroy]
     resources :replies, only: [:edit, :update, :destroy]
     resources :categories, only: [:create, :new]
     resources :users, only: [:destroy]
   end
-#   namespace :owner do
-  #     resources :businesses, only: [:edit, :update] do
-  #       resources :replies, only: [:new, :create]
-#     end
-#   end
+  namespace :business_owner do
+    get '/admin_panel', to: 'pages#admin_panel'
+    resources :businesses, only: [:edit, :update] do
+      resources :replies, only: [:new, :create]
+    end
+  end
   
   resources :categories, only: [:show]
   
@@ -39,6 +45,8 @@ Rails.application.routes.draw do
     end
     resources :reviews, only: [:create]
   end  
+  
+  resources :business_ownerships, only: [:new, :create]
   
   resources :reviews, only: [:index]
   

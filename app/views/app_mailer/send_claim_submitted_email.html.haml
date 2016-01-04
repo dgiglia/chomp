@@ -1,0 +1,13 @@
+!!! 5
+%html(lang="en-US")
+  %body
+    %p You've submitted a claim for #{@business_ownership.business.name}. Your claim to this business is being reviewed. You may be contacted for further verification.
+    %p You will be notified when your claim has been approved. You will then have access to edit your business details and reply to reviews of your business.
+    %br
+    %p Submitted Business Ownership Claim:
+    %p= @business_ownership.business.name
+    %p= @business_ownership.owner.name
+    %p= @business_ownership.contact_phone
+    %p= @business_ownership.contact_address
+    %p= @business_ownership.message
+   
