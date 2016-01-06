@@ -40,10 +40,12 @@
             %tr 
               %h4 Business Ownerships Pending Approval
             %tr
-              %th(width="15%") User
-              %th(width="15%") Business
+              %th(width="20%") User
+              %th(width="20%") Business
               %th(width="20%") Contact Info
-              %th(width="30%") Message
+              %th(width="20%") Message
+              /%th(width="10%") Previously Approved Owners
+              /%th(width="10%") Other Users with Claim
               %th(width="10%") Approve
               %th(width="10%") Deny
           %tbody
@@ -55,6 +57,7 @@
                   = claim.business.name
                 %td.extra-padding 
                   = claim.contact_phone
+                  %br
                   = claim.contact_address
                 %td.extra-padding 
                   = claim.message

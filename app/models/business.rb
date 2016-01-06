@@ -3,7 +3,7 @@ class Business < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
   has_many :recommendations
   has_many :owners, through: :business_ownerships
-  has_many :business_ownerships, dependent: :destroy
+  has_many :business_ownerships, -> { where approved: true }, dependent: :destroy
   belongs_to :category
   
   validates_presence_of :name, :city, :state
@@ -20,6 +20,6 @@ class Business < ActiveRecord::Base
   end
   
   def owned?
-    business_ownerships.where(approved: true).any?
-  end  
+    owners.any?
+  end
 end

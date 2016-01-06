@@ -48,7 +48,10 @@
             = link_to admin_review_path(review), method: :delete, class: "btn btn-danger btn-xs" do
               %i.glyphicon.glyphicon-remove 
               Delete Review 
-            %p
+          - if signed_in? && @business.owners.include?(current_user)
+            = link_to business_owner_reply_path(review), class: "btn btn-default btn-xs" do
+              %i.glyphicon.glyphicon-pencil 
+              Reply
           %p
             - review.rating.times do
               <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
@@ -60,6 +63,23 @@
             = link_to review.user.name, user_path(review.user) 
             on #{display_datetime(review.created_at)}
           %hr
+          - if review.replies.empty?
+            .well
+              %header
+                %h4 Reply to this review
+              = bootstrap_nested_form_for [review, Reply.new], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10' do |f|
+                %fieldset
+                  = f.text_area :comment, rows: 3, label: "Comments"
+                %fieldset.form-group.actions
+                  = f.submit "Reply", class: "btn btn-success col-sm-offset-2"
+                  = link_to "Cancel", @business, class: "btn btn-default"
+          - @replies.each do |reply|
+            .well
+              %p= reply.comment
+              %p.quiet 
+                Reply by owner:
+                = link_to reply.user.name, user_path(reply.user) 
+                on #{display_datetime(reply.created_at)}
     .col-sm-3.col-sm-offset-1
       %h4 About #{@business.name}
       %label Location
