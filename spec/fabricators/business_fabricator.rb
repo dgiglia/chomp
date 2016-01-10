@@ -4,4 +4,5 @@ Fabricator(:business) do
   state {Faker::Address.state}
   address {Faker::Address.street_address}
   url {Faker::Internet.domain_name}
+  approved true
 end

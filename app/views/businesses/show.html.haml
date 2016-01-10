@@ -2,7 +2,7 @@
   .row
     .col-sm-10.col-sm-offset-1.profile
       .col-sm-3
-        %img.img-responsive{:src => asset_path("face_icons/shop.png")}
+        %img.img-responsive{:src => asset_path("#{@business.business_photo? ? @business.business_photo : "face_icons/shop.png"}")}
       .col-sm-5
         %h2= @business.name
         %h4= @business.city + ", " + @business.state 
@@ -22,6 +22,11 @@
           = link_to admin_business_path(@business), method: :delete, class: "btn btn-danger" do
             %i.glyphicon.glyphicon-remove 
             Delete Business
+        - if signed_in? && @business.owners.include?(current_user)
+          %hr
+          = link_to edit_business_owner_business_path(@business), class: "btn btn-default" do
+            %i.glyphicon.glyphicon-pencil 
+            Edit Business
           
   .row
     .col-sm-6.col-sm-offset-1
@@ -42,13 +47,18 @@
         %h4 #{@business.name}'s chOMPs
         - @reviews.each do |review|
           - if signed_in? && admin?
-            = link_to edit_admin_review_path(review), class: "btn btn-default btn-xs" do
+            = link_to edit_admin_review_path(review), class: "btn btn-primary btn-xs" do
               %i.glyphicon.glyphicon-pencil 
               Edit Review
             = link_to admin_review_path(review), method: :delete, class: "btn btn-danger btn-xs" do
               %i.glyphicon.glyphicon-remove 
               Delete Review 
-            %p
+          - if signed_in? && @business.owners.include?(current_user)
+            = link_to new_business_owner_reply_path(review), class: "btn btn-primary btn-xs" do
+              %i.glyphicon.glyphicon-send 
+              Reply
+          %br
+          %br
           %p
             - review.rating.times do
               <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
@@ -59,6 +69,22 @@
             Reviewed by:
             = link_to review.user.name, user_path(review.user) 
             on #{display_datetime(review.created_at)}
+          - review.replies.each do |reply|
+            .well
+              - if signed_in? && admin?
+                = link_to edit_admin_reply_path(reply), class: "btn btn-primary btn-xs" do
+                  %i.glyphicon.glyphicon-pencil 
+                  Edit Reply
+                = link_to admin_reply_path(reply), method: :delete, class: "btn btn-danger btn-xs" do
+                  %i.glyphicon.glyphicon-remove 
+                  Delete Reply
+              %br
+              %br
+              %p= reply.comment
+              %p.quiet 
+                Reply by owner:
+                = link_to reply.user.name, user_path(reply.user) 
+                on #{display_datetime(reply.created_at)}
           %hr
     .col-sm-3.col-sm-offset-1
       %h4 About #{@business.name}
@@ -70,7 +96,7 @@
       %label Category
       %p= @business.category.name
       %label Website
-      %p= link_to fix_url(@business.url)
+      %p= link_to fix_url(@business.url) if @business.url
       %hr
       %label Overall Rating
       %p
@@ -81,5 +107,10 @@
       %p= latest_chomp(@business)
       %label Total chOMPs
       %p= @business.reviews.count
+      %br
+      - unless @business.owned?
+        = link_to new_business_ownership_path(business_id: @business.id), class: "btn btn-default" do
+          %i.glyphicon.glyphicon-flag 
+          Claim This Business
       %hr
       

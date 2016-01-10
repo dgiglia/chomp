@@ -26,7 +26,7 @@ describe RecommendationsController do
   
   describe "POST create" do
     it_behaves_like "require sign in" do
-      let(:action) {get :new}
+      let(:action) {post :create}
     end
     
     context "with authenticated user" do

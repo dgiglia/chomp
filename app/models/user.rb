@@ -1,8 +1,11 @@
 class User < ActiveRecord::Base
   include Tokenable
   
+  has_many :businesses, through: :business_ownerships
+  has_many :business_ownerships, -> { where approved: true }, foreign_key: "owner_id", dependent: :destroy
+  has_many :replies
   has_many :reviews, -> {order("created_at DESC")}, dependent: :destroy
-  has_many :favorites, -> {order("created_at DESC")}, dependent: :destroy
+  has_many :favorites, -> {order("created_at DESC")}, dependent: :destroy  
   has_many :recommendations, foreign_key: "sender_id"
   has_many :following_connections, -> {order("created_at DESC")}, class_name: "Connection", foreign_key: "follower_id", dependent: :destroy
   has_many :leading_connections, -> {order("created_at DESC")}, class_name: "Connection", foreign_key: "leader_id", dependent: :destroy
@@ -21,5 +24,9 @@ class User < ActiveRecord::Base
   
   def follows?(another_user)
     following_connections.map(&:leader).include?(another_user)
+  end
+  
+  def business_owner?
+    businesses.any?
   end
 end

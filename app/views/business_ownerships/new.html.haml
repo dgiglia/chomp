@@ -1,0 +1,14 @@
+%section.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      = bootstrap_form_for @business_ownership, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-6' do |f|
+        %header
+          %h2 Owner Verification: #{@business.name}  
+          %p Please fill out this form. While your claim is processing you may be contacted by us to verify your ownership of this business. You will be notified when your claim has been approved.
+        %fieldset
+          = hidden_field_tag :business_id, @business.id
+          = f.text_field :contact_phone, label: "Contact Phone"
+          = f.text_area :contact_address, label: "Contact Address"
+          = f.text_area :message, label: "Claim Message", rows: 6, placeholder: "Let us know any information supporting your claim"
+        %fieldset.actions.control-group.col-sm-offset-2
+          = f.submit "Make Claim", class: "btn btn-default"

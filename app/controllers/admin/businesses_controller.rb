@@ -1,19 +1,5 @@
 class Admin::BusinessesController < AdminsController
-  before_action :require_admin
-  
-  def new
-    @business = Business.new
-  end
-  
-  def create
-    @business = Business.new(business_params)
-    if @business.save
-      flash['success'] = "The business was successfully created."
-      redirect_to home_path
-    else
-      render :new
-    end
-  end  
+  before_action :require_admin  
   
   def edit
     @business = Business.find(params[:id])
@@ -30,14 +16,21 @@ class Admin::BusinessesController < AdminsController
     end
   end
   
+  def approve_business
+    @business = Business.find(params[:id])
+    @business.update_attribute(:approved, true)
+    flash['success'] = "Business has been approved and added to index."
+    redirect_to admin_admin_panel_path
+  end
+
   def destroy
     @business = Business.find(params[:id])
     @business.destroy
-    redirect_to home_path
+    redirect_to admin_admin_panel_path
   end
   
   private
   def business_params
-    params.require(:business).permit(:name, :address, :city, :state, :url, :category_id)
+    params.require(:business).permit(:name, :address, :city, :state, :url, :category_id, :approved)
   end
 end

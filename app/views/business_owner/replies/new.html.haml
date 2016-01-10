@@ -1,0 +1,23 @@
+%section.container
+  .row
+    .col-sm-10
+      .well
+        %header
+          %h1 Reply to this review:
+          %br
+        .well  
+          %p
+            - @review.rating.times do
+              <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
+            #{@review.rating} / 5 bites
+          %p= @review.comment
+          %img.img-responsive{:src => asset_path("#{@review.review_photo}")}
+          %p.quiet 
+            Reviewed by:
+            = link_to @review.user.name, user_path(@review.user) 
+            on #{display_datetime(@review.created_at)}
+        = bootstrap_form_for [:business_owner, @reply], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10' do |f|
+          %fieldset
+            = f.text_area :comment, rows: 6, label: "Reply"
+          %fieldset.form-group.actions
+            = f.submit "Submit Reply", class: "btn btn-success col-sm-offset-2"

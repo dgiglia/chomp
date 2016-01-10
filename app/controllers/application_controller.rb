@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def admin?
     current_user.admin?
   end
-  
+    
   def signed_in?
     !!current_user
   end
