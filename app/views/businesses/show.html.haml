@@ -58,6 +58,7 @@
               %i.glyphicon.glyphicon-send 
               Reply
           %br
+          %br
           %p
             - review.rating.times do
               <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
@@ -70,6 +71,15 @@
             on #{display_datetime(review.created_at)}
           - review.replies.each do |reply|
             .well
+              - if signed_in? && admin?
+                = link_to edit_admin_reply_path(reply), class: "btn btn-primary btn-xs" do
+                  %i.glyphicon.glyphicon-pencil 
+                  Edit Reply
+                = link_to admin_reply_path(reply), method: :delete, class: "btn btn-danger btn-xs" do
+                  %i.glyphicon.glyphicon-remove 
+                  Delete Reply
+              %br
+              %br
               %p= reply.comment
               %p.quiet 
                 Reply by owner:

@@ -1,0 +1,11 @@
+%section.container
+  .row
+    .col-sm-10
+      .well
+        %header
+          %h1 Edit Reply
+        = bootstrap_form_for [:admin, @reply] do |f|
+          %fieldset
+            = f.text_area :comment, rows: 6, label: "Comments"
+          %fieldset.form-group.actions
+            = f.submit "Submit", class: "btn btn-success"

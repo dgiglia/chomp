@@ -9,14 +9,14 @@ describe BusinessOwner::RepliesController do
       let(:user) {Fabricate(:user)}
       let(:cat) {Fabricate(:category)}
       let(:bus) {Fabricate(:business, category: cat)}
-      let(:review) {Fabricate(:review, business_id: bus.id, user_id: user.id)}
+      let(:review) {Fabricate(:review, business: bus, user: user)}
       before do          
-        rel = Fabricate(:business_ownership, business_id: bus.id, owner_id: owner.id, approved: true)
+        rel = Fabricate(:business_ownership, business: bus, owner: owner, approved: true)
         set_current_user(owner)
       end
       
       context "with valid input" do
-        before {post :create, reply: Fabricate.attributes_for(:reply), review_id: review, owner_id: owner}
+        before {post :create, reply: Fabricate.attributes_for(:reply), review: review, owner: owner}
         
         it {is_expected.to redirect_to business_path(review.business)}
         it {is_expected.to set_flash[:success]}
@@ -35,7 +35,7 @@ describe BusinessOwner::RepliesController do
       end
       
       context "with invalid input" do
-        before {post :create, reply: Fabricate.attributes_for(:reply, comment: ""), review_id: review, owner_id: owner}
+        before {post :create, reply: Fabricate.attributes_for(:reply, comment: ""), review: review, owner: owner}
 
         it {is_expected.to render_template(:new)}
         it {is_expected.to set_flash.now[:danger]}
@@ -53,7 +53,7 @@ describe BusinessOwner::RepliesController do
       let(:review) {Fabricate(:review, business: bus, user: user)}
       
       it_behaves_like "require sign in" do
-        let(:action) {post :create, reply: Fabricate.attributes_for(:reply), review_id: review}
+        let(:action) {post :create, reply: Fabricate.attributes_for(:reply), review: review}
       end
     end
   end
