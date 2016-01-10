@@ -30,11 +30,11 @@ Rails.application.routes.draw do
     resources :categories, only: [:create, :new]
     resources :users, only: [:destroy]
   end
+  
   namespace :business_owner do
     get '/admin_panel', to: 'pages#admin_panel'
-    resources :businesses, only: [:edit, :update] do
-      resources :replies, only: [:new, :create]
-    end
+    resources :businesses, only: [:edit, :update]
+    resources :replies, only: [:new, :create]
   end
   
   resources :categories, only: [:show]

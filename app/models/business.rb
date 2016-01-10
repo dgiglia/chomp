@@ -9,6 +9,8 @@ class Business < ActiveRecord::Base
   validates_presence_of :name, :city, :state
   validates_uniqueness_of :name
   
+  mount_uploader :business_photo, BusinessPhotoUploader
+  
   def average_rating
     return 0 if reviews.empty?
     reviews.average(:rating).round(1)
@@ -21,5 +23,9 @@ class Business < ActiveRecord::Base
   
   def owned?
     owners.any?
+  end
+  
+  def recent_reviews
+    reviews.where('created_at >= ?', 1.week.ago) if reviews
   end
 end

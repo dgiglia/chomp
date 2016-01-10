@@ -3,7 +3,7 @@
     .col-sm-10.col-sm-offset-1
       %article
         %header
-          %h2 Owner Admin Panel
+          %h2 Business Owner Admin Panel
           %hr
           
         %br    
@@ -14,18 +14,21 @@
             %tr
               %th(width="20%") Name
               %th(width="20%") City, State
-              %th(width="40%") URL
+              %th(width="20%") URL
+              %th(width="20%") Recent Reviews?
               %th(width="20%") Action
           %tbody
-            -@verified_businesses.each do |business|
+            -@businesses.each do |business|
               %tr              
                 %td.extra-padding
-                  = business.name
+                  = link_to business.name, business_path(business)
                 %td.extra-padding
                   = business.city + ", " + business.state
                 %td.extra-padding 
                   = link_to fix_url(business.url) if business.url
                 %td.extra-padding 
-                  = link_to edit_owner_business_path(id: business.id) do
+                  = "Yes" if business.recent_reviews.any?
+                %td.extra-padding 
+                  = link_to edit_business_owner_business_path(id: business.id) do
                     %i.glyphicon.glyphicon-pencil
                     Edit

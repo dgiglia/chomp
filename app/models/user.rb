@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   
   has_many :businesses, through: :business_ownerships
   has_many :business_ownerships, -> { where approved: true }, foreign_key: "owner_id", dependent: :destroy
+  has_many :replies
   has_many :reviews, -> {order("created_at DESC")}, dependent: :destroy
   has_many :favorites, -> {order("created_at DESC")}, dependent: :destroy  
   has_many :recommendations, foreign_key: "sender_id"

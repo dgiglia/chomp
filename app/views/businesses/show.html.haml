@@ -2,7 +2,7 @@
   .row
     .col-sm-10.col-sm-offset-1.profile
       .col-sm-3
-        %img.img-responsive{:src => asset_path("face_icons/shop.png")}
+        %img.img-responsive{:src => asset_path("#{@business.business_photo? ? @business.business_photo : "face_icons/shop.png"}")}
       .col-sm-5
         %h2= @business.name
         %h4= @business.city + ", " + @business.state 
@@ -22,6 +22,11 @@
           = link_to admin_business_path(@business), method: :delete, class: "btn btn-danger" do
             %i.glyphicon.glyphicon-remove 
             Delete Business
+        - if signed_in? && @business.owners.include?(current_user)
+          %hr
+          = link_to edit_business_owner_business_path(@business), class: "btn btn-default" do
+            %i.glyphicon.glyphicon-pencil 
+            Edit Business
           
   .row
     .col-sm-6.col-sm-offset-1
@@ -42,16 +47,17 @@
         %h4 #{@business.name}'s chOMPs
         - @reviews.each do |review|
           - if signed_in? && admin?
-            = link_to edit_admin_review_path(review), class: "btn btn-default btn-xs" do
+            = link_to edit_admin_review_path(review), class: "btn btn-primary btn-xs" do
               %i.glyphicon.glyphicon-pencil 
               Edit Review
             = link_to admin_review_path(review), method: :delete, class: "btn btn-danger btn-xs" do
               %i.glyphicon.glyphicon-remove 
               Delete Review 
           - if signed_in? && @business.owners.include?(current_user)
-            = link_to business_owner_reply_path(review), class: "btn btn-default btn-xs" do
-              %i.glyphicon.glyphicon-pencil 
+            = link_to new_business_owner_reply_path(review), class: "btn btn-primary btn-xs" do
+              %i.glyphicon.glyphicon-send 
               Reply
+          %br
           %p
             - review.rating.times do
               <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
@@ -62,24 +68,14 @@
             Reviewed by:
             = link_to review.user.name, user_path(review.user) 
             on #{display_datetime(review.created_at)}
-          %hr
-          - if review.replies.empty?
-            .well
-              %header
-                %h4 Reply to this review
-              = bootstrap_nested_form_for [review, Reply.new], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10' do |f|
-                %fieldset
-                  = f.text_area :comment, rows: 3, label: "Comments"
-                %fieldset.form-group.actions
-                  = f.submit "Reply", class: "btn btn-success col-sm-offset-2"
-                  = link_to "Cancel", @business, class: "btn btn-default"
-          - @replies.each do |reply|
+          - review.replies.each do |reply|
             .well
               %p= reply.comment
               %p.quiet 
                 Reply by owner:
                 = link_to reply.user.name, user_path(reply.user) 
                 on #{display_datetime(reply.created_at)}
+          %hr
     .col-sm-3.col-sm-offset-1
       %h4 About #{@business.name}
       %label Location
