@@ -16,6 +16,9 @@ gem 'mini_magick'
 gem 'figaro'
 gem 'sidekiq'
 gem 'unicorn'
+gem 'sentry-raven'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 group :development do
   gem 'thin'
