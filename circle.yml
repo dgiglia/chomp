@@ -1,0 +1,21 @@
+machine:
+  ruby:
+    version: 2.1.5
+  services:
+    - elasticsearch  
+deployment:
+  production:
+    branch: master
+    commands:
+      - heroku maintenance:on --app chomp-dg
+      - heroku pg:backups capture --app chomp-dg
+      - git push git@heroku.com:chomp-dg.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app chomp-dg
+      - heroku maintenance:off --app chomp-dg
+  staging:
+    branch: staging
+    commands:
+      - heroku maintenance:on --app staging-chomp-dg
+      - git push git@heroku.com:staging-chomp-dg.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app staging-chomp-dg
+      - heroku maintenance:off --app staging-chomp-dg
