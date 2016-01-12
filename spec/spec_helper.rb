@@ -45,4 +45,8 @@ RSpec.configure do |config|
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
   end
+  
+  config.before(:each, elasticsearch: true) do
+    Business.__elasticsearch__.create_index! force: true
+  end
 end

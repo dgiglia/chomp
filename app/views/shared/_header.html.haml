@@ -20,6 +20,7 @@
           .form-group
             = search_field_tag :search_term, params[:search_term], placeholder: "Search by City", class: 'form-control'
             = submit_tag "Go!", class: "btn btn-default"
+        %li= link_to "Advanced Search", advanced_search_businesses_path
         -if signed_in?      
           %li= link_to "chOMPs", reviews_path 
           %li= link_to "Add A New Eatery", new_business_path

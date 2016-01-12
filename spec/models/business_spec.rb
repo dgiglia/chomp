@@ -27,4 +27,48 @@ describe Business do
       expect(business.average_rating).to eq(2.7)
     end
   end
+  
+  describe ".search", :elasticsearch do
+    let(:refresh_index) do
+      Business.import
+      Business.__elasticsearch__.refresh_index!
+    end
+
+    context "with name" do
+      it "returns no results when there's no match" do
+        cat = Fabricate(:category)
+        Fabricate(:business, name: "Gordon's", category: cat)
+        refresh_index
+
+        expect(Business.search("whatever").records.to_a).to eq []
+      end
+
+      it "returns an empty array when there's no search term" do
+        cat = Fabricate(:category)
+        hot_food = Fabricate(:business, category: cat)
+        burgers = Fabricate(:business, category: cat)
+        refresh_index
+
+        expect(Business.search("").records.to_a).to eq []
+      end
+
+      it "returns an array of 1 business for name case insensitve match" do
+        cat = Fabricate(:category)
+        hot_food = Fabricate(:business, category: cat, name: "Hot Food")
+        burgers = Fabricate(:business, category: cat, name: "Burgers")
+        refresh_index
+
+        expect(Business.search("food").records.to_a).to eq [hot_food]
+      end
+
+      it "returns an array of many businesses for title match" do
+        cat = Fabricate(:category)
+        hot_food = Fabricate(:business, category: cat, name: "Hot Food")
+        burgers = Fabricate(:business, category: cat, name: "Hot Burgers")
+        refresh_index
+
+        expect(Business.search("hot").records.to_a).to match_array [hot_food, burgers]
+      end
+    end
+  end
 end

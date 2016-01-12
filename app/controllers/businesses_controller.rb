@@ -28,6 +28,14 @@ class BusinessesController < ApplicationController
     @results = Business.search_by_city(params[:search_term])
   end  
   
+  def advanced_search
+    if params[:query]
+      @businesses = Business.search(params[:query]).records.to_a
+    else
+      @businesses = []
+    end  
+  end
+  
   private
   def business_params
     params.require(:business).permit(:name, :address, :city, :state, :url, :category_id)

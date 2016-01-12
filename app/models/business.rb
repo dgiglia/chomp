@@ -1,4 +1,8 @@
 class Business < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+  index_name ["myflix", Rails.env].join'_'
+  
   has_many :reviews, -> {order("created_at DESC")}, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :recommendations
@@ -19,6 +23,23 @@ class Business < ActiveRecord::Base
   def self.search_by_city(search_term)
     return [] if search_term.blank?
     where("city ILIKE ?", "%#{search_term}%").order("name ASC")
+  end
+  
+  def as_indexed_json(options={})
+    as_json(only: [:name, :city, :state])
+  end
+  
+  def self.search(query)
+    search_definition = {
+      query: {
+        multi_match: {
+          query: query,
+          fields: [:name, :city, :state],
+          operator: "and"
+        }
+      }
+    }
+    __elasticsearch__.search(search_definition)
   end
   
   def owned?
