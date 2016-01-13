@@ -19,6 +19,7 @@ gem 'unicorn'
 gem 'sentry-raven'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'draper'
 
 group :development do
   gem 'thin'

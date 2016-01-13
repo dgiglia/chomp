@@ -10,7 +10,7 @@ class BusinessesController < ApplicationController
   end
   
   def show
-    @business = Business.find(params[:id])
+    @business = BusinessDecorator.decorate(Business.find(params[:id]))
     @reviews = @business.reviews
   end
   
@@ -27,6 +27,19 @@ class BusinessesController < ApplicationController
   def search
     @results = Business.search_by_city(params[:search_term])
   end  
+  
+  def advanced_search
+    options = {
+      reviews: params[:reviews],
+      average_rating_from: params[:average_rating_from],
+      average_rating_to: params[:average_rating_to]
+    }
+    if params[:query]
+      @businesses = Business.search(params[:query], options).records.to_a
+    else
+      @businesses = []
+    end  
+  end
   
   private
   def business_params

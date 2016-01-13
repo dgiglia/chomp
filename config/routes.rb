@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   resources :businesses, only: [:show, :new, :create] do
     collection do
       get '/search', to: 'businesses#search'
+      get '/advanced_search', to: 'businesses#advanced_search', as: 'advanced_search'
     end
     resources :reviews, only: [:create]
   end  
