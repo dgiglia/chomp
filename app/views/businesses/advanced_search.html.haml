@@ -15,7 +15,10 @@
               Include Reviews
       
       .form-group
-        .row.average_rating_label Average Rating
+        .row.average_rating_label 
+          .col-sm-6
+            %label
+              Average Rating
         = label_tag :average_rating_from, "From:", class: "col-sm-1 control-label"
         .col-sm-2
           = select_tag :average_rating_from, options_for_select((10..50).map {|num| num/10.0}, params[:average_rating_from]), prompt: "-", class: "form-control"
