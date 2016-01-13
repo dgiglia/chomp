@@ -102,7 +102,7 @@
       %p
         - @business.average_rating.to_i.times do
           <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
-        #{@business.average_rating} / 5 bites
+          = @business.average_rating
       %label Latest chOMP
       %p= latest_chomp(@business)
       %label Total chOMPs
