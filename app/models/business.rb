@@ -4,7 +4,7 @@ class Business < ActiveRecord::Base
   index_name ["myflix", Rails.env].join'_'
   
   has_many :reviews, -> {order("created_at DESC")}, dependent: :destroy
-  has_many :favorites, dependent: :destroy
+  has_many :favorites, -> {order("created_at DESC")}, dependent: :destroy
   has_many :recommendations
   has_many :owners, through: :business_ownerships
   has_many :business_ownerships, -> { where approved: true }, dependent: :destroy

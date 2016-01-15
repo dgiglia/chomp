@@ -3,7 +3,7 @@ require "spec_helper"
 describe Business do
   it { is_expected.to have_many(:reviews).order("created_at DESC").dependent(:destroy) }
   it { is_expected.to belong_to(:category) }
-  it { is_expected.to have_many(:favorites).dependent(:destroy) }
+  it { is_expected.to have_many(:favorites).order("created_at DESC").dependent(:destroy) }
   it { is_expected.to have_many(:recommendations) }
   it { is_expected.to have_many(:business_ownerships).dependent(:destroy) }
   it { is_expected.to have_many(:owners).through(:business_ownerships) }
@@ -19,8 +19,23 @@ describe Business do
       review1 = Fabricate(:review, business: business, rating: 5)
       review2 = Fabricate(:review, business: business, rating: 1)
       review3 = Fabricate(:review, business: business, rating: 2)
-      average = (5 + 1 + 2) / 3
       expect(business.average_rating).to eq(2.7)
+    end
+  end
+  
+  describe "#owned?" do
+    let(:cat) {Fabricate(:category)}
+    let(:business) {Fabricate(:business, category: cat)}
+    let(:owner) {Fabricate(:user)}
+    
+    it "is true if if a business has any owners whose associated business ownerships are approved" do
+      Fabricate(:business_ownership, approved: true, business: business, owner: owner)
+      expect(business.owned?).to be true
+    end
+    
+    it "is false if a business has no approved business ownerships" do
+      Fabricate(:business_ownership, approved: false, business: business, owner: owner)
+      expect(business.owned?).to be false
     end
   end
   
@@ -31,39 +46,27 @@ describe Business do
     end
 
     context "with name" do
-      it "returns no results when there's no match" do
-        cat = Fabricate(:category)
-        Fabricate(:business, name: "Gordon's", category: cat)
+      let(:cat) {Fabricate(:category)}
+      before do
+        @hot_food = Fabricate(:business, category: cat, name: "Hot Food")
+        @burgers = Fabricate(:business, category: cat, name: "Hot Burgers")
         refresh_index
+      end
 
+      it "returns no results when there's no match" do        
         expect(Business.search("whatever").records.to_a).to eq []
       end
 
       it "returns an empty array when there's no search term" do
-        cat = Fabricate(:category)
-        hot_food = Fabricate(:business, category: cat)
-        burgers = Fabricate(:business, category: cat)
-        refresh_index
-
         expect(Business.search("").records.to_a).to eq []
       end
 
       it "returns an array of 1 business for name case insensitve match" do
-        cat = Fabricate(:category)
-        hot_food = Fabricate(:business, category: cat, name: "Hot Food")
-        burgers = Fabricate(:business, category: cat, name: "Burgers")
-        refresh_index
-
-        expect(Business.search("food").records.to_a).to eq [hot_food]
+        expect(Business.search("food").records.to_a).to eq [@hot_food]
       end
 
-      it "returns an array of many businesses for name match" do
-        cat = Fabricate(:category)
-        hot_food = Fabricate(:business, category: cat, name: "Hot Food")
-        burgers = Fabricate(:business, category: cat, name: "Hot Burgers")
-        refresh_index
-
-        expect(Business.search("hot").records.to_a).to match_array [hot_food, burgers]
+      it "returns an array of many businesses for name match" do       
+        expect(Business.search("hot").records.to_a).to match_array [@hot_food, @burgers]
       end
     end
     
@@ -74,7 +77,6 @@ describe Business do
         city = Fabricate(:business, category: cat, city: "Hot city")
         state = Fabricate(:business, category: cat, state: "Hot state")
         refresh_index
-
         expect(Business.search("hot").records.to_a).to match_array [state, city, hot_food]
       end
     end
@@ -85,35 +87,29 @@ describe Business do
         diner1 = Fabricate(:business, category: cat, name: "Penny Diner I")
         diner2 = Fabricate(:business, category: cat, name: "Penny Diner II")
         diner3 = Fabricate(:business, category: cat, name: "Star Diner")
-        diner4 = Fabricate(:business, category: cat, name: "Penny Restaurant")
-        
+        diner4 = Fabricate(:business, category: cat, name: "Penny Restaurant")        
         refresh_index
-
         expect(Business.search("Penny Diner").records.to_a).to match_array [diner1, diner2]
       end
     end
     
     context "with name, city, state and reviews" do
-      it 'returns an an empty array for no match with reviews option' do
-        cat = Fabricate(:category)
-        star_diner = Fabricate(:business, category: cat, name: "Star Diner")
-        bird = Fabricate(:business, category: cat, name: "Birdfood")
-        bird_review = Fabricate(:review, business: bird, comment: "5 star restaurant!")
+      let(:cat) {Fabricate(:category)}
+      before do
+        @star_diner = Fabricate(:business, category: cat, name: "Star Diner")
+        @city = Fabricate(:business, city: "Star City", category: cat)
+        @state = Fabricate(:business, state: "Star State", category: cat)
+        @bird = Fabricate(:business, category: cat, name: "Birdfood")
+        @bird_review = Fabricate(:review, business: @bird, comment: "5 star restaurant!")
         refresh_index
-
+      end
+      
+      it 'returns an an empty array for no match with reviews option' do
         expect(Business.search("no_match", reviews: true).records.to_a).to eq([])
       end
 
       it 'returns an array of many businesss with relevance name > city > state > review' do
-        cat = Fabricate(:category)
-        star_diner = Fabricate(:business, category: cat, name: "Star Diner")
-        city = Fabricate(:business, city: "Star City", category: cat)
-        state = Fabricate(:business, state: "Star State", category: cat)
-        bird = Fabricate(:business, category: cat, name: "Birdfood")
-        bird_review = Fabricate(:review, business: bird, comment: "5 star restaurant!")
-        refresh_index
-
-        expect(Business.search("star", reviews: true).records.to_a).to eq([star_diner, city, state, bird])
+        expect(Business.search("star", reviews: true).records.to_a).to eq([@star_diner, @city, @state, @bird])
       end
     end  
     

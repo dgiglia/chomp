@@ -5,7 +5,7 @@
         %img.img-responsive{:src => asset_path("#{@user.avatar}")} 
       .col-sm-5
         %h2= @user.name
-        %h4= @user.city + ", " + @user.state 
+        %h4= @user.location 
         %hr
         = link_to connections_path(leader_id: @user.id), method: :post, class: "btn btn-default" do
           %i.glyphicon.glyphicon-plus 
@@ -33,7 +33,7 @@
       .row
         - @user.favorites.limit(6).each do |favorite|
           .col-sm-6
-            %label= link_to favorite.business_name, favorite.business
+            %label= link_to favorite.business.name, favorite.business
       %hr
       %h4 Recent Connections      
       .row
@@ -44,7 +44,7 @@
     .col-sm-3.col-sm-offset-1
       %h4 About #{@user.name}
       %label Location
-      %p= @user.city + ", " + @user.state
+      %p= @user.location
       %label chOMPing since
       %p= display_datetime(@user.created_at)
       %label Latest chOMP
