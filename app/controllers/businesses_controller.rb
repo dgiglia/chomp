@@ -20,6 +20,7 @@ class BusinessesController < ApplicationController
       flash['success'] = "Business submitted and pending approval."
       redirect_to home_path
     else
+      flash.now['danger'] = "Business was not submitted."
       render :new
     end
   end

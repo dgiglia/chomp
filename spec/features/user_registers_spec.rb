@@ -11,10 +11,10 @@ feature 'User Registers' do
   end
 
   def fill_in_registration_form
-    fill_in('Email', with: 'jimmy@example.com')
-    fill_in('Password', with: 'password')
-    fill_in('Name', with: 'Jimmy Jones')
-    fill_in('City', with: 'Vanegen')
-    fill_in('State', with: 'ND')
+    fill_in 'Email', with: 'jimmy@example.com'
+    fill_in 'Password', with: 'password'
+    fill_in 'Name', with: 'Jimmy Jones'
+    fill_in 'City', with: 'Vanegen'
+    fill_in 'State', with: 'ND'
   end
 end

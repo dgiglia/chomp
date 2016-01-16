@@ -19,7 +19,7 @@ feature "User interacts with advanced search", :elasticsearch do
     click_on "Advanced Search"
   end
 
-  scenario "user searches with title" do
+  scenario "user searches with name" do
     within(".advanced_search") do
       fill_in "query", with: "Lucky"
       click_button "Search"
@@ -30,7 +30,7 @@ feature "User interacts with advanced search", :elasticsearch do
     expect(page).to have_content("Lucky Dominoes")
   end
 
-  scenario "user searches with name and city" do
+  scenario "user searches with city" do
     within(".advanced_search") do
       fill_in "query", with: "Chicago"
       click_button "Search"

@@ -5,7 +5,7 @@ describe Admin::CategoriesController do
     it "sets @category" do
       set_current_admin
       get :new
-      expect(assigns(:category)).to be_instance_of(Category)
+      expect(assigns(:category)).to be_a_new(Category)
     end
 
     it_behaves_like "require sign in" do

@@ -8,7 +8,7 @@ feature "User views another user's profile" do
     
     sign_in
     visit reviews_path
-    click_link('fig')
+    click_link "fig"
     expect(page).to have_content "chOMPing since"
   end
 end

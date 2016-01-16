@@ -18,7 +18,7 @@ describe Admin::RepliesController do
     context "with valid input" do
       before {patch :update, id: reply, reply: Fabricate.attributes_for(:reply, comment: "*edited for content*") }
 
-      it "should update attributes of @review" do
+      it "should update attributes of @reply" do
         expect(reply.reload.comment).to eq("*edited for content*")
       end
 
