@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature "user resets password" do
   scenario "user successfully resets password" do
-    jane = Fabricate(:user, password: 'old_password', )
+    jane = Fabricate(:user, password: 'old_password')
     
     visit sign_in_path
     click_link "Forgot Password?"

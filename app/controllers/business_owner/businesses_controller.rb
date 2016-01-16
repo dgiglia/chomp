@@ -1,5 +1,4 @@
 class BusinessOwner::BusinessesController < BusinessOwnersController
-  before_action :require_business_owner  
   
   def edit
     @business = Business.find(params[:id])

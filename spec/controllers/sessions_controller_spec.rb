@@ -21,7 +21,7 @@ describe SessionsController do
       
       it {is_expected.to set_session[:user_id].to(jenkins.id)}      
       it {is_expected.to redirect_to home_path}      
-      it {is_expected.to set_flash}
+      it {is_expected.to set_flash[:success]}
     end
     
     context "with invalid credentials" do
@@ -29,7 +29,7 @@ describe SessionsController do
       
       it {is_expected.to set_session.to(nil)}      
       it {is_expected.to redirect_to sign_in_path}      
-      it {is_expected.to set_flash}
+      it {is_expected.to set_flash[:danger]}
     end
   end
   
@@ -41,6 +41,6 @@ describe SessionsController do
     
     it {is_expected.to set_session.to(nil)}      
     it {is_expected.to redirect_to root_path}      
-    it {is_expected.to set_flash}
+    it {is_expected.to set_flash[:success]}
   end
 end
