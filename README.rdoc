@@ -1,2 +1,2 @@
-chOMP a Yelp-ish clone for practice 
+chOMP: a Yelp clone for practice 
 Tealeaf Academy: Course 3
