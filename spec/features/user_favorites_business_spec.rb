@@ -3,8 +3,7 @@ require 'spec_helper'
 feature "User favorites business" do    
   scenario "add it to favorites page" do 
     cat = Fabricate(:category)
-    Fabricate(:business, name: "Funville", category: cat)
-    
+    Fabricate(:business, name: "Funville", category: cat)   
     
     sign_in    
     click_link "Funville"

@@ -24,7 +24,7 @@ describe FavoritesController do
         session[:user_id] = jim.id
       end
       
-      it "redirect to my favorites page" do
+      it "redirects to favorites page" do
         post :create, business_id: hopper.id
         expect(response).to redirect_to favorites_path
       end
@@ -44,7 +44,7 @@ describe FavoritesController do
         expect(Favorite.first.user).to eq(jim)
       end
       
-      it "does not add business if already in queue" do
+      it "does not add business if already in favorites" do
         Fabricate(:favorite, business: hopper, user: jim)
         post :create, business_id: hopper.id
         expect(jim.favorites.count).to eq(1)
@@ -73,7 +73,7 @@ describe FavoritesController do
         expect(response).to redirect_to favorites_path
       end
 
-      it "does not delete item if it is not in current user's queue" do
+      it "does not delete item if it is not in current user's favorites" do
         susie = Fabricate(:user)
         item2 = Fabricate(:favorite, user: susie)
         delete :destroy, id: item2.id

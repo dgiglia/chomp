@@ -24,7 +24,7 @@ describe ReviewsController do
           expect(Review.first.business).to eq(business)
         end
         
-        it "creates review associated with the user" do
+        it "creates review associated with the current user" do
           expect(Review.first.user).to eq(jenkins)
         end                
       end

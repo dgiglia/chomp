@@ -16,9 +16,9 @@
               - @favorites.each do |item|
                 %tr 
                   %td
-                    = link_to item.business_name, item.business
+                    = link_to item.business.name, item.business
                   %td
-                    = link_to item.category_name, item.category
+                    = link_to item.category.name, item.category
                   %td
                     - item.business.average_rating.to_i.times do
                       <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 

@@ -38,6 +38,7 @@ describe BusinessOwner::RepliesController do
         before {post :create, reply: Fabricate.attributes_for(:reply, comment: ""), review: review, owner: owner}
 
         it {is_expected.to render_template(:new)}
+        
         it {is_expected.to set_flash.now[:danger]}
         
         it "does not create a reply" do

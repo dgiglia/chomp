@@ -2,10 +2,10 @@
   .row
     .col-sm-10.col-sm-offset-1.profile
       .col-sm-3
-        %img.img-responsive{:src => asset_path("#{@business.business_photo? ? @business.business_photo : "face_icons/shop.png"}")}
+        %img.img-responsive{:src => asset_path("#{@business.avatar}")}
       .col-sm-5
         %h2= @business.name
-        %h4= @business.city + ", " + @business.state 
+        %h4= @business.location 
         %hr
         -if signed_in?
           = link_to favorites_path(business_id: @business.id), method: :post, class: "btn btn-default" do
@@ -92,17 +92,17 @@
       %p
         = @business.address 
         <br>
-        = @business.city + ", " + @business.state
+        = @business.location
       %label Category
       %p= @business.category.name
       %label Website
-      %p= link_to fix_url(@business.url) if @business.url
+      %p= @business.website
       %hr
       %label Overall Rating
       %p
         - @business.average_rating.to_i.times do
           <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
-          = @business.average_rating
+        = @business.overall_rating
       %label Latest chOMP
       %p= latest_chomp(@business)
       %label Total chOMPs

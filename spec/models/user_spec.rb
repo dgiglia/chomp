@@ -22,17 +22,32 @@ describe User do
   
   describe "#follow" do
     let(:user) {Fabricate(:user)}
+    let(:holly) {Fabricate(:user)}
     
     it "follows another user" do
-      holly = Fabricate(:user)
       holly.follow(user)
       expect(holly.follows?(user)).to be true
     end
     
     it "does not follow oneself" do
-      holly = Fabricate(:user)
       holly.follow(holly)
         expect(holly.follows?(holly)).to be false
+    end
+  end
+  
+  describe "#business_owner?" do
+    let(:cat) {Fabricate(:category)}
+    let(:business) {Fabricate(:business, category: cat)}
+    let(:owner) {Fabricate(:user)}
+    
+    it "is true if if a user has any business whose business ownerships are approved" do
+      Fabricate(:business_ownership, approved: true, business: business, owner: owner)
+      expect(owner.business_owner?).to be true
+    end
+    
+    it "is false if a user has no approved business ownerships" do
+      Fabricate(:business_ownership, approved: false, business: business, owner: owner)
+      expect(owner.business_owner?).to be false
     end
   end
 end

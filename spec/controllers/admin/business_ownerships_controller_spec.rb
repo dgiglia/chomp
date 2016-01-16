@@ -14,7 +14,7 @@ describe Admin::BusinessOwnershipsController do
       patch :approve, id: claim
     end
       
-    it "updates business attribute approved to true" do
+    it "updates ownership attribute approved to true" do
       expect(claim.reload.approved).to be true
     end
     

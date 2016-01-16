@@ -3,21 +3,6 @@ require "spec_helper"
 describe Admin::BusinessesController do
   it {is_expected.to use_before_action(:require_admin)}
   
-  describe "PATCH approve_business" do
-    let(:cat) {Fabricate(:category)}
-    let(:bus) {Fabricate(:business, category: cat, approved: false)}
-    before do
-      set_current_admin
-      patch :approve_business, id: bus
-    end
-      
-    it "updates business attribute approved to true" do
-      expect(bus.reload.approved).to be true
-    end
-    
-    it {is_expected.to redirect_to admin_admin_panel_path}
-  end
-  
   describe "PATCH update" do
     let(:cat) {Fabricate(:category)}
     let(:bus) {Fabricate(:business, category: cat, name: "Pancake City")}
@@ -47,6 +32,21 @@ describe Admin::BusinessesController do
       it {is_expected.to set_flash.now[:danger]}
     end
   end 
+  
+  describe "PATCH approve_business" do
+    let(:cat) {Fabricate(:category)}
+    let(:bus) {Fabricate(:business, category: cat, approved: false)}
+    before do
+      set_current_admin
+      patch :approve_business, id: bus
+    end
+      
+    it "updates business attribute approved to true" do
+      expect(bus.reload.approved).to be true
+    end
+    
+    it {is_expected.to redirect_to admin_admin_panel_path}
+  end
   
   describe "DELETE destroy" do
     context "with authenticated user" do

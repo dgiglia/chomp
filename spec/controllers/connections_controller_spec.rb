@@ -4,8 +4,8 @@ describe ConnectionsController do
   it {is_expected.to use_before_action(:require_user)}
   
   describe "GET index" do
+    let(:julie) {Fabricate(:user)}
     it "sets @connections to current user's following connections" do
-      julie = Fabricate(:user)
       set_current_user
       connection = Fabricate(:connection, follower: current_user, leader: julie)
       get :index
@@ -13,7 +13,6 @@ describe ConnectionsController do
     end
     
     it "sets @inverse_connections to current user's leading connections" do
-      julie = Fabricate(:user)
       set_current_user
       connection = Fabricate(:connection, follower: julie, leader: current_user)
       get :index

@@ -29,25 +29,6 @@ describe BusinessOwnershipsController do
       let(:action) {post :create}
     end
     
-    context "with authenticated user" do
-      let(:cat) {Fabricate(:category)}
-      let(:business) {Fabricate(:business, category: cat)}
-      let(:jane) {Fabricate(:user)}
-      before do
-        set_current_user(jane)
-        post :create, business_ownership: Fabricate.attributes_for(:business_ownership), business_id: business.id
-      end
-      after {ActionMailer::Base.deliveries.clear}
-      
-      it "creates a business_ownership associated with the business" do
-        expect(BusinessOwnership.first.business_id).to eq(business.id)
-      end
-      
-      it "creates a business_ownership associated with the signed in user" do
-        expect(BusinessOwnership.first.owner_id).to eq(jane.id)
-      end
-    end
-    
     context "with valid input" do
       let(:cat) {Fabricate(:category)}
       let(:business) {Fabricate(:business, category: cat)}
@@ -60,6 +41,14 @@ describe BusinessOwnershipsController do
       
       it "creates a business_ownership" do
         expect(BusinessOwnership.count).to eq(1)
+      end
+      
+      it "creates a business_ownership associated with the business" do
+        expect(BusinessOwnership.first.business_id).to eq(business.id)
+      end
+      
+      it "creates a business_ownership associated with the signed in user" do
+        expect(BusinessOwnership.first.owner_id).to eq(jim.id)
       end
       
       it "sends an email to the owner" do
