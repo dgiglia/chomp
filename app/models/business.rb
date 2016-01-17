@@ -1,7 +1,7 @@
 class Business < ActiveRecord::Base
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
-  index_name ["myflix", Rails.env].join'_'
+  index_name ["chomp", Rails.env].join'_'
   
   has_many :reviews, -> {order("created_at DESC")}, dependent: :destroy
   has_many :favorites, -> {order("created_at DESC")}, dependent: :destroy
