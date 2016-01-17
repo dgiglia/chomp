@@ -88,3 +88,4 @@ Chomp::Application.configure do
     :authentication => :plain,
   }
 end
+
