@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.1.5'
 gem 'rails', '4.2.0'
 gem 'haml-rails', '~> 0.9.0'
 gem 'bootstrap-sass', '~> 3.3.5'
