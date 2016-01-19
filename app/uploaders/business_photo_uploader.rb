@@ -11,7 +11,11 @@ class BusinessPhotoUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
   
-  storage :aws
+  if Rails.env.staging? || Rails.env.production?
+    storage :aws
+  else
+    storage :file
+  end
 
 end
 
