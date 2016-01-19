@@ -8,9 +8,9 @@ CarrierWave.configure do |config|
     config.aws_authenticated_url_expiration = 60 * 60 * 24 * 7
 
     config.aws_credentials = {
-      access_key_id:     ENV.fetch('AWS_ACCESS_KEY_ID'),
-      secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
-      region:            ENV.fetch('AWS_REGION') # Required
+      access_key_id:     ENV.fetch('ACCESS_KEY_ID'),
+      secret_access_key: ENV.fetch('SECRET_ACCESS_KEY'),
+      region:            ENV.fetch('REGION') # Required
     }
   else
     config.storage = :file
