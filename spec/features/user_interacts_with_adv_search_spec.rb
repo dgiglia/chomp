@@ -25,7 +25,7 @@ feature "User interacts with advanced search", :elasticsearch do
       click_button "Search"
     end
 
-    expect(page).to have_content("2 eateries found")
+    expect(page).to have_content("2 restaurants found")
     expect(page).to have_content("The Lucky Star")
     expect(page).to have_content("Lucky Dominoes")
   end

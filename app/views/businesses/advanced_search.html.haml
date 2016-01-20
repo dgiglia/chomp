@@ -5,7 +5,7 @@
         %h1 Advanced Search
       .form-group
         .col-sm-6
-          = search_field_tag :query, params[:query], placeholder: "Search eateries by name, city, or state", class: 'form-control'
+          = search_field_tag :query, params[:query], placeholder: "Search restaurants by name, city, or state", class: 'form-control'
           
       .form-group
         .col-sm-6
@@ -32,6 +32,6 @@
             Search
     %hr
     - if params[:query].present?
-      %h2 Results: #{@businesses.count} eateries found
+      %h2 Results: #{@businesses.count} restaurants found
       - @businesses.each do |business|
         = render 'business', business: business

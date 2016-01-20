@@ -6,7 +6,7 @@ class BusinessesController < ApplicationController
   end
   
   def index
-    @businesses = Business.where(approved: true).sort_by(&:name)
+    @businesses = Business.where(approved: true).order('name ASC')
   end
   
   def show

@@ -1,6 +1,7 @@
 %section.container
   .col-sm-12.col-sm-offset-1
     %h2= @category.name
+    %h4 #{@category.businesses.count} restaurants found
     .row
       - @category.businesses.each do |business|
         = render 'businesses/business', business: business

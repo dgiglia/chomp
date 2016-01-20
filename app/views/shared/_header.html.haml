@@ -10,7 +10,7 @@
     .collapse.navbar-collapse
       %ul.nav.navbar-nav         
         %li.dropdown
-          %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Eateries <span class="caret" aria-hidden="true"></span>
+          %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Restaurants <span class="caret" aria-hidden="true"></span>
           %ul.dropdown-menu
             - Category.all.each do |category|
               %li= link_to category.name, category
@@ -23,8 +23,9 @@
         %li= link_to "Advanced Search", advanced_search_businesses_path
         -if signed_in?      
           %li= link_to "chOMPs", reviews_path 
-          %li= link_to "Add A New Eatery", new_business_path
+          %li= link_to "Add A New Restaurant", new_business_path
       %ul.nav.navbar-nav.navbar-right
+        %li= link_to "Sign In", sign_in_path unless signed_in?
         -if signed_in?
           %li.dropdown
             %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Welcome #{current_user.name} <span class="caret" aria-hidden="true"></span>

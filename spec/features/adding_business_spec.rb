@@ -10,7 +10,7 @@ feature "Business is added" do
     tom = Fabricate(:admin)
     
     sign_in(jane)
-    click_link "Add A New Eatery"
+    click_link "Add A New Restaurant"
     fill_in_business_form
     click_button "Submit"
     expect(page).to have_content "Business submitted and pending approval."
