@@ -31,7 +31,7 @@ describe User do
     
     it "does not follow oneself" do
       holly.follow(holly)
-        expect(holly.follows?(holly)).to be false
+      expect(holly.follows?(holly)).to be false
     end
   end
   

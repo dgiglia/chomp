@@ -1,6 +1,6 @@
 %section.container
   .col-sm-12.col-sm-offset-1
-    %h2= "Results for '#{params[:search_term]}':"
+    %h2= "Results for '#{params[:search_term]}': #{@results.count} restaurants found"
     .row
       - @results.each do |business|
         = render 'business', business: business

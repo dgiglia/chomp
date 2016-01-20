@@ -25,7 +25,7 @@ feature "User interacts with advanced search", :elasticsearch do
       click_button "Search"
     end
 
-    expect(page).to have_content("2 eateries found")
+    expect(page).to have_content("2 restaurants found")
     expect(page).to have_content("The Lucky Star")
     expect(page).to have_content("Lucky Dominoes")
   end
@@ -51,9 +51,10 @@ feature "User interacts with advanced search", :elasticsearch do
     expect(page).to have_content "Star City"
     expect(page).to have_no_content "Lucky"
   end
+  
+  def refresh_index
+    Business.import
+    Business.__elasticsearch__.refresh_index!
+  end
 end
 
-def refresh_index
-  Business.import
-  Business.__elasticsearch__.refresh_index!
-end

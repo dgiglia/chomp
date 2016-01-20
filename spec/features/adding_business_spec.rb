@@ -10,7 +10,7 @@ feature "Business is added" do
     tom = Fabricate(:admin)
     
     sign_in(jane)
-    click_link "Add A New Eatery"
+    click_link "Add A New Restaurant"
     fill_in_business_form
     click_button "Submit"
     expect(page).to have_content "Business submitted and pending approval."
@@ -26,13 +26,15 @@ feature "Business is added" do
     visit home_path
     expect(page).to have_content "Hoggy's Place"    
   end
+  
+  def fill_in_business_form
+    fill_in 'Name', with: "Hoggy's Place"
+    fill_in 'Address', with: '123 Place Street'
+    fill_in 'City', with: 'Ogden'
+    fill_in 'State', with: 'Vermont'
+    fill_in 'Website', with: 'www.example40.com'
+    select "three", from: 'Category'
+  end
 end
 
-def fill_in_business_form
-  fill_in 'Name', :with => "Hoggy's Place"
-  fill_in 'Address', :with => '123 Place Street'
-  fill_in 'City', :with => 'Ogden'
-  fill_in 'State', :with => 'Vermont'
-  fill_in 'Website', :with => 'www.example40.com'
-  select "three", :from => 'Category'
-end
+  

@@ -1,2 +1,1 @@
-chOMP: a Yelp clone for practice 
-Tealeaf Academy: Course 3
+chOMP: a Yelp-like web-app focusing on local restaurants. Rate and review recently visited restaurants, follow others who have the same taste, keep track of your favorite places and recommend them to friends.

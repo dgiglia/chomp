@@ -7,9 +7,10 @@
           %table.table
             %thead
               %tr                
-                %th(width="30%") Eatery
+                %th(width="30%") Restaurant
                 %th(width="20%") Category
-                %th(width="20%") Overall Rating 
+                %th(width="20%") Overall Rating
+                %th(width="10%") Recent Reviews? 
                 %th(width="10%") Recommend
                 %th(width="10%") Remove
             %tbody
@@ -23,6 +24,9 @@
                     - item.business.average_rating.to_i.times do
                       <span class="glyphicon glyphicon-ice-lolly-tasted"></span> 
                     #{item.business.average_rating} / 5 bites
+                  %td 
+                    = "Yes" if item.business.recent_reviews.any?
+                    = "No" if item.business.recent_reviews.empty?
                   %td
                     = link_to new_recommendation_path(business_id: item.business.id) do
                       %i.glyphicon.glyphicon-envelope 

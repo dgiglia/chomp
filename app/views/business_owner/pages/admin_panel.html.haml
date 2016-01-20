@@ -28,6 +28,7 @@
                   = link_to fix_url(business.url) if business.url
                 %td.extra-padding 
                   = "Yes" if business.recent_reviews.any?
+                  = "No" if business.recent_reviews.empty?
                 %td.extra-padding 
                   = link_to edit_business_owner_business_path(id: business.id) do
                     %i.glyphicon.glyphicon-pencil

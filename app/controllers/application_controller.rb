@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
   
   def access_denied
-    flash['danger'] = "You can't do that!"
+    flash['danger'] = "You can't do that without an account with the proper permissions! Please sign in."
     redirect_to root_path
   end
 end
