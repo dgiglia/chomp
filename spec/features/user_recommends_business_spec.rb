@@ -5,17 +5,14 @@ feature "User recommends business" do
     user = Fabricate(:user)
     @friend = Fabricate(:user, email: "holly@example.com")
     cat = Fabricate(:category)
-    business = Fabricate(:business, category: cat)
+    @business = Fabricate(:business, category: cat)
     
     sign_in(user)
-    recommend(business)
+    recommend(@business)
     sign_out
     
-    open_email "holly@example.com"
-    current_email.click_link business.name
-    
-    expect(page).to have_content business.url
-    
+    friend_follows_recommendation
+  
     clear_email
   end
   
@@ -27,5 +24,11 @@ feature "User recommends business" do
     fill_in "Friend's Email Address", with: @friend.email
     fill_in "Recommendation Message", with: "Check this place out. It's great!"
     click_button "Send Recommendation"
+  end
+  
+  def friend_follows_recommendation
+    open_email "holly@example.com"
+    current_email.click_link @business.name
+    expect(page).to have_content @business.url
   end
 end

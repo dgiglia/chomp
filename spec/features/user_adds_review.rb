@@ -10,9 +10,10 @@ feature "User adds review" do
 
     expect(page).to have_content "Your review was successfully created."
   end
+  
+  def fill_in_review_form
+    fill_in 'Comments', with: 'This is great.'
+    select '3 Bites', from: 'Rating'
+  end
 end
 
-def fill_in_review_form
-  fill_in('Comments', :with => 'This is great.')
-  select('3 Bites', :from => 'Rating')
-end
