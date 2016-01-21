@@ -13,6 +13,6 @@ class BusinessDecorator < Draper::Decorator
   end
   
   def website
-    h.link_to_if object.url, h.fix_url(object.url)
+    h.link_to_if object.url, h.fix_url(object.url), h.fix_url(object.url)
   end
 end
